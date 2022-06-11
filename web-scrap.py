@@ -1,10 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
+
+import json
 url="https://www.owl.health/blog/"
 page = requests.get(url).text
 doc=BeautifulSoup(page, 'html.parser')
 pages = int(doc.find(class_='alignleft').a['href'].split('/')[-2])
-
+output=[]
 for page in range(1, pages + 1 ):
   url=f"https://www.owl.health/blog/page/{page}/?et_blog"
   page = requests.get(url).text
@@ -18,11 +20,18 @@ for page in range(1, pages + 1 ):
     detail_page = BeautifulSoup(get_details, 'html.parser')
     details=detail_page.find(class_="et_pb_post_content")
     description=item.find(class_="post-content-inner")
-     
-    print("Blog Title: " + title.text)
-    print("Blog Description: " + details.text)
-    print("link : " + link)
-    print("-------------------------")
+    
+    blog={}
+    blog["Blog Title"]=title.text
+    try:
+      blog["Blog Description"]=details.text
+    except:
+      pass
+    
+    output.append(blog)
+print(json.dumps(output))
+with open("outfile.json", "w") as f:
+  f.write(json.dumps(output))
   
 
 # src=result.content
