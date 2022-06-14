@@ -60,23 +60,25 @@ output=[]
 #     output.append(blog)
 
 #press release data
-press_url="https://azzly.com/"
+press_url="https://azzly.com/blog/"
 press_page = requests.get(press_url).text
 press_doc=BeautifulSoup(press_page, 'html.parser')
-press_pages = int(press_doc.find(class_='page-numbers').a['href'].split('/')[-2])
+press_pages =int(press_doc.find(class_='page-numbers').a['href'].split('/')[-2])
+
+
 
 for page in range(1, press_pages + 1 ):
-  press_url=f"https://www.owl.health/category/media-hits/page/{page}/?et_blog"
+  press_url=f"https://azzly.com/blog/page/{page}"
   press_page = requests.get(press_url).text
   press_doc=BeautifulSoup(press_page, 'html.parser')
   items = press_doc.find_all(class_="blog-entry")
   for item in items:
-    title =item.find(class_="entry-title")
+    title =item.find(class_="blog-entry-title")
     get_link = item.find('a')
     link=get_link.attrs['href']
     get_details = requests.get(link).text 
     detail_page = BeautifulSoup(get_details, 'html.parser')
-    details=detail_page.find(class_="field-name-body")
+    details=detail_page.find(class_="single-blog-content")
     press={}
     press["Press Title: "]=title.text
     try:
