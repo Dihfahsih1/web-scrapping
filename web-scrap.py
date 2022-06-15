@@ -1,4 +1,4 @@
-import requests
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 import json
@@ -158,3 +158,31 @@ output=[]
 
 # print(pdf_url)
 
+#news data
+news_url="https://mdlogix.com/mdlogix-news/page/2/"
+
+req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
+webpage = urlopen(req, timeout=10).read()
+news_doc=BeautifulSoup(webpage, 'html.parser')
+news_pages = int(news_doc.find(class_='posts-page-links').a['href'].split('/')[-2]) 
+
+for page in range(1, news_pages + 1 ):
+  req = Request('https://mdlogix.com/mdlogix-news/page/{page}', headers={'User-Agent': 'XYZ/3.0'})
+  webpage = urlopen(req, timeout=10).read()
+  news_doc=BeautifulSoup(webpage, 'html.parser')
+  items = news_doc.find_all(class_="et_pb_post")
+  for item in items:
+    title =item.find(class_="entry-title")
+    get_link = item.find('a')
+    link=get_link.attrs['href']
+    get_details = webpage.get(link).text 
+    detail_page = BeautifulSoup(get_details, 'html.parser')
+    details=detail_page.find(class_="field-name-body")
+    news={}
+    news["News Title: "]=title.text
+    try:
+      news["News Description: "]=details.text
+    except:
+      pass
+    
+    output.append(news)
