@@ -1,1 +1,3 @@
 *.json
+/venv
+/betteroutcomesnow-articles-pdf

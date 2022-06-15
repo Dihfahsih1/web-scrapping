@@ -59,37 +59,141 @@ output=[]
 #       pass
 #     output.append(blog)
 
-#press release data
-press_url="https://azzly.com/blog/"
-press_page = requests.get(press_url).text
-press_doc=BeautifulSoup(press_page, 'html.parser')
-press_pages =int(press_doc.find(class_='page-numbers').a['href'].split('/')[-2])
+#blogs
+# press_url="https://azzly.com/blog/"
+# press_page = requests.get(press_url).text
+# press_doc=BeautifulSoup(press_page, 'html.parser')
+# press_pages =int(press_doc.find(class_='page-numbers').a['href'].split('/')[-2])
 
-
-
-for page in range(1, press_pages + 1 ):
-  press_url=f"https://azzly.com/blog/page/{page}"
-  press_page = requests.get(press_url).text
-  press_doc=BeautifulSoup(press_page, 'html.parser')
-  items = press_doc.find_all(class_="blog-entry")
-  for item in items:
-    title =item.find(class_="blog-entry-title")
-    get_link = item.find('a')
-    link=get_link.attrs['href']
-    get_details = requests.get(link).text 
-    detail_page = BeautifulSoup(get_details, 'html.parser')
-    details=detail_page.find(class_="single-blog-content")
-    press={}
-    press["Press Title: "]=title.text
-    try:
-      press["Press Description: "]=details.text
-    except:
-      pass
+# for page in range(1, press_pages + 1 ):
+#   press_url=f"https://azzly.com/blog/page/{page}"
+#   press_page = requests.get(press_url).text
+#   press_doc=BeautifulSoup(press_page, 'html.parser')
+#   items = press_doc.find_all(class_="blog-entry")
+#   for item in items:
+#     title =item.find(class_="blog-entry-title")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     get_details = requests.get(link).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find(class_="single-blog-content")
+#     press={}
+#     press["Press Title: "]=title.text
+#     try:
+#       press["Press Description: "]=details.text
+#     except:
+#       pass
     
-    output.append(press)    
+#     output.append(press)    
     
-with open("press-data.json", "w") as f:
-  f.write(json.dumps(output))
+# with open("press-data.json", "w") as f:
+#   f.write(json.dumps(output))
   
+  
+  
+#Betteroutcomenow
+# archive_url="https://blog.betteroutcomesnow.com/archive/2022"
+# press_urls=int(archive_url.split('/')[-1])
+
+
+# for url in range(2017, press_urls +1 ):
+#   press_url=f"https://blog.betteroutcomesnow.com/archive/{url}/"
+#   press_page = requests.get(press_url).text
+#   press_doc=BeautifulSoup(press_page, 'html.parser')
+#   items = press_doc.find_all(class_="post-item")
+  
+#   for item in items:
+#     title =item.find(class_="post-header")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     get_details = requests.get(link).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find(class_="hs_cos_wrapper hs_cos_wrapper_meta_field hs_cos_wrapper_type_rich_text")
+#     press={}
+#     press["Title: "]=title.text
+#     press["Description: "]=details.text
+#     output.append(press)    
+    
+# with open("betteroutcomesnow-archived-blogs-data.json", "w") as f:
+#   f.write(json.dumps(output))
+ 
+# from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+# from pdfminer.converter import TextConverter
+# from pdfminer.layout import LAParams
+# from pdfminer.pdfpage import PDFPage
+# from io import StringIO
+# output_string = StringIO()
+# def convert_pdf_to_txt(path):
+#     rsrcmgr = PDFResourceManager()
+#     device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
+#     fp = open(path, 'rb')
+#     interpreter = PDFPageInterpreter(rsrcmgr, device)
+#     password = ""
+#     maxpages = 0
+#     caching = True
+#     pagenos=set()
+
+#     for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
+#         interpreter.process_page(page)
+
+#     text = output_string.getvalue()
+
+#     fp.close()
+#     device.close()
+#     output_string.close()
+#     return text 
+  
+# import re
+# from urllib.request import urlopen
+# from urllib.request import urlretrieve
+
+# html = urlopen("https://betteroutcomesnow.com/resources/articles-handouts/")
+# html_doc = html.read()
+
+# match = re.search(b'\"(.*?\.pdf)\"', html_doc)
+# pdf_url = "" + match.group(1).decode('utf8')
+# urlretrieve(pdf_url, "download.pdf")
+# text = convert_pdf_to_txt("download.pdf")
+# print(text)
+
+# print(pdf_url)
+
+# Import libraries
+import requests
+from bs4 import BeautifulSoup
+
+# URL from which pdfs to be downloaded
+url = "https://betteroutcomesnow.com/resources/articles-handouts/"
+
+# Requests URL and get response object
+response = requests.get(url)
+
+# Parse text obtained
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Find all hyperlinks present on webpage
+links = soup.find_all('a')
+
+i = 0
+
+# From all links check for pdf link and
+# if present download file
+for link in links:
+  if ('.pdf' in link.get('href', [])):
+    i += 1
+    #("Downloading file: ", i)
+    response = requests.get(link.get('href'))
+    file_name = link.get('href')
+    file_name = file_name.replace("https://betteroutcomesnow.com/wp-content/uploads/",'/').split('/')[-1]
+
+    pdf = open(file_name, 'wb')
+    pdf.write(response.content)
+    pdf.close()
+    print("File ", i, " downloaded")
+   
+		
+
+print("All PDF files downloaded")
+
 
 
