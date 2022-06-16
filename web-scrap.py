@@ -1,10 +1,11 @@
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
+import requests
 
 import json
 output=[]
 
-# #news data
+# #https://www.owl.health
 # news_url="https://www.owl.health/category/media-hits/"
 # news_page = requests.get(news_url).text
 # news_doc=BeautifulSoup(news_page, 'html.parser')
@@ -59,7 +60,7 @@ output=[]
 #       pass
 #     output.append(blog)
 
-#blogs
+#https://azzly.com/blog/
 # press_url="https://azzly.com/blog/"
 # press_page = requests.get(press_url).text
 # press_doc=BeautifulSoup(press_page, 'html.parser')
@@ -158,31 +159,61 @@ output=[]
 
 # print(pdf_url)
 
-#news data
-news_url="https://mdlogix.com/mdlogix-news/page/2/"
+#https://mdlogix.com
+# req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
+# webpage = urlopen(req, timeout=10).read()
+# news_doc=BeautifulSoup(webpage, 'html.parser')
+# news_pages = int(news_doc.find(class_='posts-page-links').a['href'][-2]) 
+# for page in range(1, news_pages + 1 ):
+#   req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
+  
+#   webpage = urlopen(req, timeout=100).read()
+#   news_doc=BeautifulSoup(webpage, 'html.parser')
+#   items = news_doc.find_all(class_="entry-body")
+  
+#   for item in items:
+#     title =item.find(class_="entry-title")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     headers={'User-Agent': 'XYZ/3.0'}
+#     response = requests.get(link, headers=headers).text
+#     detail_page = BeautifulSoup(response, 'html.parser')
+#     details=detail_page.find(class_="entry-content")
+#     news={}
+#     news["Title"]=title.text
+#     news["Description"]=details.text
+#     output.append(news) 
+# with open("mdlogix-news-data.json", "w") as f:
+#   f.write(json.dumps(output))  
 
-req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
-webpage = urlopen(req, timeout=10).read()
-news_doc=BeautifulSoup(webpage, 'html.parser')
-news_pages = int(news_doc.find(class_='posts-page-links').a['href'].split('/')[-2]) 
+#https://www.blueprint-health.com/
+press_url="https://www.blueprint-health.com/blog"
+press_page = requests.get(press_url).text
+press_doc=BeautifulSoup(press_page, 'html.parser')
+press_pages =int(press_doc.find(class_='w-pagination-wrapper').a['href'].split('=')[-1])
 
-for page in range(1, news_pages + 1 ):
-  req = Request('https://mdlogix.com/mdlogix-news/page/{page}', headers={'User-Agent': 'XYZ/3.0'})
-  webpage = urlopen(req, timeout=10).read()
-  news_doc=BeautifulSoup(webpage, 'html.parser')
-  items = news_doc.find_all(class_="et_pb_post")
+for page in range(1, press_pages + 1 ):
+  print(page)
+  press_url=f"https://www.blueprint-health.com/blog?cbb911e6_page={page}"
+  press_page = requests.get(press_url).text
+  press_doc=BeautifulSoup(press_page, 'html.parser')
+  items = press_doc.find_all(class_="collection-item-blog")
   for item in items:
-    title =item.find(class_="entry-title")
+    title =item.find(class_="title-post")
     get_link = item.find('a')
     link=get_link.attrs['href']
-    get_details = webpage.get(link).text 
+    link="https://www.blueprint-health.com" +link
+    get_details = requests.get(link).text 
     detail_page = BeautifulSoup(get_details, 'html.parser')
-    details=detail_page.find(class_="field-name-body")
-    news={}
-    news["News Title: "]=title.text
-    try:
-      news["News Description: "]=details.text
-    except:
-      pass
+    details=detail_page.find(class_="rich-text-blog")
+    press={}
+    press["Title"]=title.text
+    press["Description"]=details.text
     
-    output.append(news)
+    
+    output.append(press)    
+    
+# with open("blueprint-health-blogs-data.json", "a") as f:
+#   json.dump(output, f, indent=2)
+  
+    

@@ -1,3 +1,5 @@
 *.json
 /venv
 /betteroutcomesnow-articles-pdf
+*.pyc
+/__pycache__
