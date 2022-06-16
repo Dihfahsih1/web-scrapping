@@ -213,7 +213,7 @@ for page in range(1, press_pages + 1 ):
     
     output.append(press)    
     
-# with open("blueprint-health-blogs-data.json", "a") as f:
-#   json.dump(output, f, indent=2)
+with open("blueprint-health-blogs-data.json", "a") as f:
+  json.dump(output, f, indent=2)
   
     
