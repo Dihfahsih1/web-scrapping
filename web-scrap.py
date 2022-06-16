@@ -1,3 +1,4 @@
+from unicodedata import category
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import requests
@@ -159,7 +160,64 @@ output=[]
 
 # print(pdf_url)
 
-#https://mdlogix.com
+
+
+#https://www.blueprint-health.com/
+# press_url="https://www.blueprint-health.com/blog"
+# press_page = requests.get(press_url).text
+# press_doc=BeautifulSoup(press_page, 'html.parser')
+# press_pages =int(press_doc.find(class_='w-pagination-wrapper').a['href'].split('=')[-1])
+
+# for page in range(1, press_pages + 1 ):
+#   print(page)
+#   press_url=f"https://www.blueprint-health.com/blog?cbb911e6_page={page}"
+#   press_page = requests.get(press_url).text
+#   press_doc=BeautifulSoup(press_page, 'html.parser')
+#   items = press_doc.find_all(class_="collection-item-blog")
+#   for item in items:
+#     title =item.find(class_="title-post")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     link="https://www.blueprint-health.com" +link
+#     get_details = requests.get(link).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find(class_="rich-text-blog")
+#     press={}
+#     press["Title"]=title.text
+#     press["Description"]=details.text
+    
+    
+#     output.append(press)    
+    
+# with open("blueprint-health-blogs.json", "a") as f:
+#   json.dump(output, f, indent=2)
+
+
+#https://www.greenspacehealth.com/en-ca/
+# press_url="https://www.greenspacehealth.com/en-ca/blog"
+# press_page = requests.get(press_url).text
+# press_doc=BeautifulSoup(press_page, 'html.parser')
+# items = press_doc.find_all(class_="collection-item-3")
+# for item in items:
+#   title =item.find(class_="blog-heading")
+#   get_link = item.find('a')
+#   link=get_link.attrs['href']
+#   link="https://www.greenspacehealth.com" +link
+#   get_details = requests.get(link).text 
+#   detail_page = BeautifulSoup(get_details, 'html.parser')
+#   details=detail_page.find(class_="container-9 w-container")
+#   press={}
+#   press["Title"]=title.text
+
+#   press["Description"]=details.text
+
+  
+#   output.append(press)    
+    
+# with open("greenspacehealth-blog-data.json", "a") as f:
+#   json.dump(output, f, indent=2)
+  
+ #https://mdlogix.com
 # req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
 # webpage = urlopen(req, timeout=10).read()
 # news_doc=BeautifulSoup(webpage, 'html.parser')
@@ -184,36 +242,27 @@ output=[]
 #     news["Description"]=details.text
 #     output.append(news) 
 # with open("mdlogix-news-data.json", "w") as f:
-#   f.write(json.dumps(output))  
+#   f.write(json.dumps(output))   
 
-#https://www.blueprint-health.com/
-press_url="https://www.blueprint-health.com/blog"
-press_page = requests.get(press_url).text
-press_doc=BeautifulSoup(press_page, 'html.parser')
-press_pages =int(press_doc.find(class_='w-pagination-wrapper').a['href'].split('=')[-1])
+url_list="https://www.greenspacehealth.com/en-ca/patients"
 
-for page in range(1, press_pages + 1 ):
-  print(page)
-  press_url=f"https://www.blueprint-health.com/blog?cbb911e6_page={page}"
-  press_page = requests.get(press_url).text
-  press_doc=BeautifulSoup(press_page, 'html.parser')
-  items = press_doc.find_all(class_="collection-item-blog")
-  for item in items:
-    title =item.find(class_="title-post")
-    get_link = item.find('a')
-    link=get_link.attrs['href']
-    link="https://www.blueprint-health.com" +link
-    get_details = requests.get(link).text 
-    detail_page = BeautifulSoup(get_details, 'html.parser')
-    details=detail_page.find(class_="rich-text-blog")
-    press={}
-    press["Title"]=title.text
-    press["Description"]=details.text
-    
-    
-    output.append(press)    
-    
-with open("blueprint-health-blogs-data.json", "a") as f:
+# empty list to store all results
+
+req = requests.get(url_list)
+soup = BeautifulSoup(req.text, "html.parser")
+results=soup.find('div',class_="w-dyn-items")
+results=results.find_all('div', class_="w-dyn-item")
+for result in results:
+  question =result.find('div', class_="accordion-title")
+  answer = result.find('div', class_="accordion-content w-richtext")
+  press={}
+
+  press["Question"]=question.text
+  press["Answer"]=answer.text
+  output.append(press)
+with open("greenspacehealth-FAQ-data.json", "a") as f:
   json.dump(output, f, indent=2)
   
     
+
+  
