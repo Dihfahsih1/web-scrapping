@@ -65,29 +65,29 @@ output=[]
 
 #https://azzly.com/blog/
 
-for page in range(1, 16):
-  press_url=f"https://azzly.com/blog/page/{page}"
-  press_page = requests.get(press_url).text
-  press_doc=BeautifulSoup(press_page, 'html.parser')
-  items = press_doc.find_all(class_="blog-entry")
-  for item in items:
-    title =item.find(class_="blog-entry-title")
-    get_link = item.find('a')
-    link=get_link.attrs['href']
-    get_details = requests.get(link).text 
-    detail_page = BeautifulSoup(get_details, 'html.parser')
-    details=detail_page.find(class_="single-blog-content")
-    press={}
-    press["Press Title: "]=title.text
-    try:
-      press["Press Description: "]=details.text
-    except:
-      pass
+# for page in range(1, 16):
+#   press_url=f"https://azzly.com/blog/page/{page}"
+#   press_page = requests.get(press_url).text
+#   press_doc=BeautifulSoup(press_page, 'html.parser')
+#   items = press_doc.find_all(class_="blog-entry")
+#   for item in items:
+#     title =item.find(class_="blog-entry-title")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     get_details = requests.get(link).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find(class_="single-blog-content")
+#     press={}
+#     press["Press Title: "]=title.text
+#     try:
+#       press["Press Description: "]=details.text
+#     except:
+#       pass
     
-    output.append(press)    
+#     output.append(press)    
     
-with open("azzly-new-blog-data.json", "w") as f:
-  json.dump(output, f, indent=2)
+# with open("azzly-new-blog-data.json", "w") as f:
+#   json.dump(output, f, indent=2)
   
   
   
@@ -216,31 +216,29 @@ with open("azzly-new-blog-data.json", "w") as f:
 #   json.dump(output, f, indent=2)
   
  #https://mdlogix.com
-# req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
-# webpage = urlopen(req, timeout=10).read()
-# news_doc=BeautifulSoup(webpage, 'html.parser')
-# news_pages = int(news_doc.find(class_='posts-page-links').a['href'][-2]) 
-# for page in range(1, news_pages + 1 ):
-#   req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
+req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
+webpage = urlopen(req, timeout=10).read()
+for page in range(1, 4 ):
+  req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
   
-#   webpage = urlopen(req, timeout=100).read()
-#   news_doc=BeautifulSoup(webpage, 'html.parser')
-#   items = news_doc.find_all(class_="entry-body")
+  webpage = urlopen(req, timeout=100).read()
+  news_doc=BeautifulSoup(webpage, 'html.parser')
+  items = news_doc.find_all(class_="entry-body")
   
-#   for item in items:
-#     title =item.find(class_="entry-title")
-#     get_link = item.find('a')
-#     link=get_link.attrs['href']
-#     headers={'User-Agent': 'XYZ/3.0'}
-#     response = requests.get(link, headers=headers).text
-#     detail_page = BeautifulSoup(response, 'html.parser')
-#     details=detail_page.find(class_="entry-content")
-#     news={}
-#     news["Title"]=title.text
-#     news["Description"]=details.text
-#     output.append(news) 
-# with open("mdlogix-news-data.json", "w") as f:
-#   f.write(json.dumps(output))   
+  for item in items:
+    title =item.find(class_="entry-title")
+    get_link = item.find('a')
+    link=get_link.attrs['href']
+    headers={'User-Agent': 'XYZ/3.0'}
+    response = requests.get(link, headers=headers).text
+    detail_page = BeautifulSoup(response, 'html.parser')
+    details=detail_page.find(class_="entry-content")
+    news={}
+    news["Title"]=title.text
+    news["Description"]=details.text
+    output.append(news) 
+with open("new-mdlogix-news-data.json", "a") as f:
+  json.dump(output, f, indent=2)  
 
 #Simple url scraping
 # url_list="https://www.greenspacehealth.com/en-ca/security"
