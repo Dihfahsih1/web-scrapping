@@ -2,6 +2,9 @@ from unicodedata import category
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import requests
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 import json
 output=[]
@@ -34,12 +37,8 @@ output=[]
 #     output.append(news)
 
 # #blog data   
-# blog_url="https://www.owl.health/blog/"
-# blog_page = requests.get(blog_url).text
-# blog_doc=BeautifulSoup(blog_page, 'html.parser')
-# blog_pages = int(blog_doc.find(class_='alignleft').a['href'].split('/')[-2])
-   
-# for page in range(1, blog_pages + 1 ):
+
+# for page in range(1, 4 ):
 #   blog_url=f"https://www.owl.health/blog/page/{page}/?et_blog"
 #   page = requests.get(blog_url).text
 #   doc=BeautifulSoup(page, 'html.parser')
@@ -60,36 +59,35 @@ output=[]
 #     except:
 #       pass
 #     output.append(blog)
+# with open("new-press-data.json", "w") as f:
+#   json.dump(output, f, indent=2)
+
 
 #https://azzly.com/blog/
-# press_url="https://azzly.com/blog/"
-# press_page = requests.get(press_url).text
-# press_doc=BeautifulSoup(press_page, 'html.parser')
-# press_pages =int(press_doc.find(class_='page-numbers').a['href'].split('/')[-2])
 
-# for page in range(1, press_pages + 1 ):
-#   press_url=f"https://azzly.com/blog/page/{page}"
-#   press_page = requests.get(press_url).text
-#   press_doc=BeautifulSoup(press_page, 'html.parser')
-#   items = press_doc.find_all(class_="blog-entry")
-#   for item in items:
-#     title =item.find(class_="blog-entry-title")
-#     get_link = item.find('a')
-#     link=get_link.attrs['href']
-#     get_details = requests.get(link).text 
-#     detail_page = BeautifulSoup(get_details, 'html.parser')
-#     details=detail_page.find(class_="single-blog-content")
-#     press={}
-#     press["Press Title: "]=title.text
-#     try:
-#       press["Press Description: "]=details.text
-#     except:
-#       pass
+for page in range(1, 16):
+  press_url=f"https://azzly.com/blog/page/{page}"
+  press_page = requests.get(press_url).text
+  press_doc=BeautifulSoup(press_page, 'html.parser')
+  items = press_doc.find_all(class_="blog-entry")
+  for item in items:
+    title =item.find(class_="blog-entry-title")
+    get_link = item.find('a')
+    link=get_link.attrs['href']
+    get_details = requests.get(link).text 
+    detail_page = BeautifulSoup(get_details, 'html.parser')
+    details=detail_page.find(class_="single-blog-content")
+    press={}
+    press["Press Title: "]=title.text
+    try:
+      press["Press Description: "]=details.text
+    except:
+      pass
     
-#     output.append(press)    
+    output.append(press)    
     
-# with open("press-data.json", "w") as f:
-#   f.write(json.dumps(output))
+with open("azzly-new-blog-data.json", "w") as f:
+  json.dump(output, f, indent=2)
   
   
   
@@ -244,25 +242,50 @@ output=[]
 # with open("mdlogix-news-data.json", "w") as f:
 #   f.write(json.dumps(output))   
 
-url_list="https://www.greenspacehealth.com/en-ca/patients"
+#Simple url scraping
+# url_list="https://www.greenspacehealth.com/en-ca/security"
+# # empty list to store all results
+# req = requests.get(url_list)
+# soup = BeautifulSoup(req.text, "html.parser")
+# results=soup.find('div',class_="container w-container")
+# results=results.find_all('div', class_="column-grow-hover w-col w-col-4")
+# for result in results:
+#   question =result.find(class_="heading-8")
+#   answer = result.find(class_="paragraph")
+#   press={}
 
-# empty list to store all results
+#   press["Security Feature"]=question.text
+#   press["Description"]=answer.text
+#   output.append(press)
+# with open("greenspacehealth-SecurityFeatures-data.json", "a") as f:
+#   json.dump(output, f, indent=2)
 
-req = requests.get(url_list)
-soup = BeautifulSoup(req.text, "html.parser")
-results=soup.find('div',class_="w-dyn-items")
-results=results.find_all('div', class_="w-dyn-item")
-for result in results:
-  question =result.find('div', class_="accordion-title")
-  answer = result.find('div', class_="accordion-content w-richtext")
-  press={}
 
-  press["Question"]=question.text
-  press["Answer"]=answer.text
-  output.append(press)
-with open("greenspacehealth-FAQ-data.json", "a") as f:
-  json.dump(output, f, indent=2)
+
+#https://www.holmusk.com/publications
+# url="https://www.holmusk.com/news"
+# req = requests.get(url)
+# soup = BeautifulSoup(req.text, "html.parser")
+# results=soup.find('div',class_="collection-list _3-col _2-col-tablet w-dyn-items")
+# results=results.find_all('div', class_="w-dyn-item")
+# for result in results:
+#   link = result.find('a', class_="link-block-2 w-inline-block")
+#   link=link.attrs['href']
   
-    
+#   test_cond = str(link)
+#   if "holmusk.com" in test_cond:
+#     req = requests.get(link)
+#     soup = BeautifulSoup(req.text, "html.parser")
+#     results=soup.find_all('div',class_="container news-template w-container")
 
+#     for result in results:
+#       title =result.find(class_="news-title")
+      
+#       description = result.find("div",class_="w-richtext")
+#       press={}
+#       press["News Title"]=title.text
+#       press["Details"]=description.text
+#       output.append(press)
   
+# with open("holmusk-news-events-data.json", "a") as f:
+#   json.dump(output, f, indent=2)
