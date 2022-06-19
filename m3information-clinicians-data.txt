@@ -1,3 +1,0 @@
-[{'title': 'Easy as ordering a lab test', 'Description': 'Typical mental health assessments are hugely\nfragmented and difficult to include in the clinical\nworkflow.'},
- {'title': 'The 3-5 minute assessment', 'Description': 'Patients can take a 3-5 minute assessment during\ntheir appointments or from any mobile device. With\nthis convenient method, more patients can receive\npersonalized assessment and treatment.'},
-  {'title': 'Receiving results', 'Description': 'Easy to read reports allow for longitudinal tracking\nof follow-up results within a patient’s EHR.'}]

@@ -36,33 +36,6 @@ output=[]
     
 #     output.append(news)
 
-# #blog data   
-
-# for page in range(1, 4 ):
-#   blog_url=f"https://www.owl.health/blog/page/{page}/?et_blog"
-#   page = requests.get(blog_url).text
-#   doc=BeautifulSoup(page, 'html.parser')
-#   items = doc.find_all(class_="et_pb_post")
-#   for item in items:
-#     title =item.find(class_="entry-title")
-#     get_link = item.find('a')
-#     link=get_link.attrs['href']
-#     get_details = requests.get(link).text 
-#     detail_page = BeautifulSoup(get_details, 'html.parser')
-#     details=detail_page.find(class_="et_pb_post_content")
-#     description=item.find(class_="post-content-inner")
-    
-#     blog={}
-#     blog["Blog Title: "]=title.text
-#     try:
-#       blog["Blog Description: "]=details.text
-#     except:
-#       pass
-#     output.append(blog)
-# with open("new-press-data.json", "w") as f:
-#   json.dump(output, f, indent=2)
-
-
 #https://azzly.com/blog/
 
 # for page in range(1, 16):
@@ -216,32 +189,32 @@ output=[]
 #   json.dump(output, f, indent=2)
   
  #https://mdlogix.com
-req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
-webpage = urlopen(req, timeout=10).read()
-for page in range(1, 4 ):
-  req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
+# req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
+# webpage = urlopen(req, timeout=10).read()
+# for page in range(1, 4 ):
+#   req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
   
-  webpage = urlopen(req, timeout=100).read()
-  news_doc=BeautifulSoup(webpage, 'html.parser')
-  items = news_doc.find_all(class_="entry-body")
+#   webpage = urlopen(req, timeout=100).read()
+#   news_doc=BeautifulSoup(webpage, 'html.parser')
+#   items = news_doc.find_all(class_="entry-body")
   
-  for item in items:
-    title =item.find(class_="entry-title")
-    get_link = item.find('a')
-    link=get_link.attrs['href']
-    headers={'User-Agent': 'XYZ/3.0'}
-    response = requests.get(link, headers=headers).text
-    detail_page = BeautifulSoup(response, 'html.parser')
-    details=detail_page.find(class_="entry-content")
-    news={}
-    news["Title"]=title.text
-    news["Description"]=details.text
-    output.append(news) 
+#   for item in items:
+#     title =item.find(class_="entry-title")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     headers={'User-Agent': 'XYZ/3.0'}
+#     response = requests.get(link, headers=headers).text
+#     detail_page = BeautifulSoup(response, 'html.parser')
+#     details=detail_page.find(class_="entry-content")
+#     news={}
+#     news["Title"]=title.text
+#     news["Description"]=details.text
+#     output.append(news) 
     
-with open("mdlogix-news-data.txt", "a") as f:
-  output=str(output)
-  f.write(output)
-  f.write('\n')
+# with open("mdlogix-news-data.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
 
 #Simple url scraping
 # url_list="https://www.greenspacehealth.com/en-ca/security"
@@ -290,3 +263,65 @@ with open("mdlogix-news-data.txt", "a") as f:
   
 # with open("holmusk-news-events-data.json", "a") as f:
 #   json.dump(output, f, indent=2)
+
+
+# # #owl-health-blog data   
+# for page in range(1, 4):
+#   blog_url=f"https://www.owl.health/blog/page/{page}/?et_blog"
+#   page = requests.get(blog_url).text
+#   doc=BeautifulSoup(page, 'html.parser')
+#   items = doc.find_all('div', class_="et_pb_salvattore_content")
+#   for item in items:
+#     title =item.find('h2',class_="entry-title")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     details=item.find('div',class_="post-content")
+#     get_details = requests.get(link).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find(class_="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body")
+    
+#     blog={}
+    
+#     try:
+#       blog["Newa Title: "]=title.text
+#       blog["News Description: "]=details.text
+#     except:
+#       pass
+#     output.append(blog)
+# with open("owl-health-blogs-data.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+# #blog data   
+import time
+for page in range(1, 32):
+  time.sleep(3)
+  blog_url=f"https://www.owl.health/newsroom/page/{page}/?et_blog"
+  headers = requests.utils.default_headers()
+  headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+  page = requests.get(blog_url, headers=headers).text
+  doc=BeautifulSoup(page, 'html.parser')
+  items = doc.find_all('div', class_="et_pb_salvattore_content")
+  for item in items:
+    title =item.find('h2',class_="entry-title")
+    get_link = item.find('a')
+    link=get_link.attrs['href']
+    external_details=item.find('div',class_="post-content")
+    blog={}
+    blog["Newa Title: "]=title.text
+    if "https://www.owl.health" in link:
+      get_details = requests.get(link).text 
+      detail_page = BeautifulSoup(get_details, 'html.parser')
+      details=detail_page.find(class_="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body")
+      if details is not None:
+        blog["News Description: "]=details.text
+    else:
+      blog['Description: '] = external_details.text
+      blog['External Link: '] = link
+      
+    output.append(blog)
+with open("owl-health-media-hits-data.txt", "a") as f:
+  output=str(output)
+  f.write(output)
+  f.write('\n')
