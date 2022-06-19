@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL from which pdfs to be downloaded
-url = "https://betteroutcomesnow.com/resources/articles-handouts/"
+url = "https://www.m3information.com/resources/"
 
 # Requests URL and get response object
 response = requests.get(url)
@@ -24,7 +24,7 @@ for link in links:
     #("Downloading file: ", i)
     response = requests.get(link.get('href'))
     file_name = link.get('href')
-    file_name = file_name.replace("https://betteroutcomesnow.com/wp-content/uploads/",'/').split('/')[-1]
+    file_name = file_name.replace("https://www.m3information.com/wp-content/uploads/",'/').split('/')[-1]
 
     pdf = open(file_name, 'wb')
     pdf.write(response.content)

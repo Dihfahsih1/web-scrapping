@@ -237,8 +237,11 @@ for page in range(1, 4 ):
     news["Title"]=title.text
     news["Description"]=details.text
     output.append(news) 
-with open("new-mdlogix-news-data.json", "a") as f:
-  json.dump(output, f, indent=2)  
+    
+with open("mdlogix-news-data.txt", "a") as f:
+  output=str(output)
+  f.write(output)
+  f.write('\n')
 
 #Simple url scraping
 # url_list="https://www.greenspacehealth.com/en-ca/security"
