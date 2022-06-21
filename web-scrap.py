@@ -467,9 +467,9 @@ for item in items:
       if ".pdf" not in link:
         page = requests.get(link, headers=headers).text
         doc=BeautifulSoup(page, 'html.parser')
-        details = doc.find('div',class_="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text")
-        
-        
+        details = doc.find('span',class_="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text")
+        blog["Resource Title"]=title.text
+        blog["Resource Description"]=details.text
       else:
         # creating a pdf file object 
         pdfFileObj = requests.get(link)
@@ -484,9 +484,9 @@ for item in items:
         details=pageObj.extractText()
         
         pdfFileObj.close()
-        print(details)
-        
-      blog["Resource Description"]=details
+      blog["Resource Title"]=title.text
+      blog["Resource Description"]=details.text
+      blog["Resource Pdf Link"]=link  
   else:
     blog["Resource Title"]=title.text
     blog["Resource Link"]=link
@@ -495,4 +495,3 @@ for item in items:
 with open("silver-cloud-health-resources.txt", "a") as f:
   output=str(output)
   f.write(output)
-  f.write('\n')
