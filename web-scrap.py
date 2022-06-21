@@ -445,53 +445,80 @@ output=[]
   
   
 #Silver Cloud health content library  
-import time
-from io import StringIO,BytesIO
-from PyPDF2 import PdfFileReader, PdfFileWriter
-resource_url=f"https://www.silvercloudhealth.com/uk/resources"
+# import time
+# from io import StringIO,BytesIO
+# from PyPDF2 import PdfFileReader, PdfFileWriter
+# resource_url=f"https://www.silvercloudhealth.com/uk/resources"
+# headers = requests.utils.default_headers()
+# headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+# page = requests.get(resource_url, headers=headers).text
+# doc=BeautifulSoup(page, 'html.parser')
+# items = doc.find_all('div', class_="resource")
+# for item in items:
+#   time.sleep(3)
+#   title =item.find('div',class_="resource-heading")
+#   get_link = item.find('a')
+#   link=get_link.attrs['href']
+#   details=item.find('div',class_="resource-description")
+#   blog={}
+#   blog["Resource Title"]=title.text
+#   if "https://www.silvercloudhealth.com/" in link:
+#     if ".jpg" not in link:
+#       if ".pdf" not in link:
+#         page = requests.get(link, headers=headers).text
+#         doc=BeautifulSoup(page, 'html.parser')
+#         details = doc.find('span',class_="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text")
+#         blog["Resource Title"]=title.text
+#         blog["Resource Description"]=details.text
+#       else:
+#         # creating a pdf file object 
+#         pdfFileObj = requests.get(link)
+#         writer = PdfFileWriter()
+#         remoteFile = urlopen(Request(link)).read()
+#         memoryFile = BytesIO(remoteFile)
+#         pdfReader = PdfFileReader(memoryFile, strict=False)          
+#         # creating a page object 
+#         pageObj = pdfReader.getPage(0) 
+            
+#         # extracting text from page 
+#         details=pageObj.extractText()
+#         blog["Resource Title"]=title.text
+#         blog["Resource Description"]=details
+#         blog["Resource Pdf Link"]=link 
+#         pdfFileObj.close() 
+#   else:
+#     blog["Resource Title"]=title.text
+#     blog["Resource Link"]=link
+#     blog["Resource Description"]=details.text
+#   output.append(blog)
+# with open("silver-cloud-health-resources.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+
+
+#oqmeasures-news
+url="https://www.oqmeasures.com/category/oq-news/"
 headers = requests.utils.default_headers()
 headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
-page = requests.get(resource_url, headers=headers).text
-doc=BeautifulSoup(page, 'html.parser')
-items = doc.find_all('div', class_="resource")
-for item in items:
-  time.sleep(3)
-  title =item.find('div',class_="resource-heading")
-  get_link = item.find('a')
-  link=get_link.attrs['href']
-  details=item.find('div',class_="resource-description")
-  blog={}
-  blog["Resource Title"]=title.text
-  if "https://www.silvercloudhealth.com/" in link:
-    if ".jpg" not in link:
-      if ".pdf" not in link:
-        page = requests.get(link, headers=headers).text
-        doc=BeautifulSoup(page, 'html.parser')
-        details = doc.find('span',class_="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text")
-        blog["Resource Title"]=title.text
-        blog["Resource Description"]=details.text
-      else:
-        # creating a pdf file object 
-        pdfFileObj = requests.get(link)
-        writer = PdfFileWriter()
-        remoteFile = urlopen(Request(link)).read()
-        memoryFile = BytesIO(remoteFile)
-        pdfReader = PdfFileReader(memoryFile, strict=False)          
-        # creating a page object 
-        pageObj = pdfReader.getPage(0) 
-            
-        # extracting text from page 
-        details=pageObj.extractText()
-        
-        pdfFileObj.close()
-      blog["Resource Title"]=title.text
-      blog["Resource Description"]=details.text
-      blog["Resource Pdf Link"]=link  
-  else:
-    blog["Resource Title"]=title.text
-    blog["Resource Link"]=link
-    blog["Resource Description"]=details.text
-  output.append(blog)
-with open("silver-cloud-health-resources.txt", "a") as f:
+req = requests.get(url, headers=headers)
+soup = BeautifulSoup(req.text, "html.parser")
+main=soup.find('main',class_="site-main")
+results=main.find_all('div', class_="card-body")
+for result in results:
+  title=result.find('h2', class_="entry-title card-title h3")
+  link = title.find('a', class_="text-dark")
+  link=link.attrs['href']
+  req = requests.get(link, headers=headers)
+  soup = BeautifulSoup(req.text, "html.parser")
+  details=soup.find('div',class_="card-body")
+  if details is not None:
+    details.find('header', class_="entry-header").decompose()
+    press={}
+    press["News Title"]=title.text
+    press["Details"]=details.text
+    output.append(press)
+  
+with open("oqmeasures-news.text", "a") as f:
   output=str(output)
   f.write(output)
+
