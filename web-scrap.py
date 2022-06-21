@@ -293,35 +293,209 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-# #blog data   
-import time
-for page in range(1, 32):
-  time.sleep(3)
-  blog_url=f"https://www.owl.health/newsroom/page/{page}/?et_blog"
-  headers = requests.utils.default_headers()
-  headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
-  page = requests.get(blog_url, headers=headers).text
-  doc=BeautifulSoup(page, 'html.parser')
-  items = doc.find_all('div', class_="et_pb_salvattore_content")
-  for item in items:
-    title =item.find('h2',class_="entry-title")
-    get_link = item.find('a')
-    link=get_link.attrs['href']
-    external_details=item.find('div',class_="post-content")
-    blog={}
-    blog["Newa Title: "]=title.text
-    if "https://www.owl.health" in link:
-      get_details = requests.get(link).text 
-      detail_page = BeautifulSoup(get_details, 'html.parser')
-      details=detail_page.find(class_="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body")
-      if details is not None:
-        blog["News Description: "]=details.text
-    else:
-      blog['Description: '] = external_details.text
-      blog['External Link: '] = link
+# #media-hits data of owl-health  
+# import time
+# for page in range(1, 32):
+#   time.sleep(3)
+#   blog_url=f"https://www.owl.health/newsroom/page/{page}/?et_blog"
+#   headers = requests.utils.default_headers()
+#   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#   page = requests.get(blog_url, headers=headers).text
+#   doc=BeautifulSoup(page, 'html.parser')
+#   items = doc.find_all('div', class_="et_pb_salvattore_content")
+#   for item in items:
+#     title =item.find('h2',class_="entry-title")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     external_details=item.find('div',class_="post-content")
+#     blog={}
+#     blog["Newa Title: "]=title.text
+#     if "https://www.owl.health" in link:
+#       get_details = requests.get(link).text 
+#       detail_page = BeautifulSoup(get_details, 'html.parser')
+#       details=detail_page.find(class_="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body")
+#       if details is not None:
+#         blog["News Description: "]=details.text
+#     else:
+#       blog['Description: '] = external_details.text
+#       blog['External Link: '] = link
       
-    output.append(blog)
-with open("owl-health-media-hits-data.txt", "a") as f:
-  output=str(output)
-  f.write(output)
-  f.write('\n')
+#     output.append(blog)
+# with open("owl-health-media-hits-data.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+#tridiuum news data
+# import time
+# for page in range(1, 6):
+#   time.sleep(3)
+#   blog_url=f"https://tridiuum.com/category/news/page/{page}/"
+#   headers = requests.utils.default_headers()
+#   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#   page = requests.get(blog_url, headers=headers).text
+#   doc=BeautifulSoup(page, 'html.parser')
+#   items = doc.find_all('div', class_="article-inner")
+#   for item in items:
+#     title =item.find('h2',class_="entry-title")
+#     get_link = title.find('a')
+#     link=get_link.attrs['href']
+#     news={}
+#     news["Newa Title: "]=title.text
+#     headers = requests.utils.default_headers()
+#     headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#     get_details = requests.get(link,headers=headers).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find('div',class_="entry-content single-page")
+#     # details.find('header',class_="entry-header").decompose()
+#     # details.find('nav', class_="navigation-post").decompose()
+#     news["News Description: "]=details.text      
+#     output.append(news)
+# with open("tridiuum-news-data.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+  
+# #tridiuum news data
+# import time
+# for page in range(1, 8):
+#   time.sleep(3)
+#   blog_url=f"https://tridiuum.com/category/blog/page/{page}/"
+#   headers = requests.utils.default_headers()
+#   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#   page = requests.get(blog_url, headers=headers).text
+#   doc=BeautifulSoup(page, 'html.parser')
+#   items = doc.find_all('div', class_="article-inner")
+#   for item in items:
+#     title =item.find('h2',class_="entry-title")
+#     get_link = title.find('a')
+#     link=get_link.attrs['href']
+#     news={}
+#     news["Newa Title: "]=title.text
+#     headers = requests.utils.default_headers()
+#     headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#     get_details = requests.get(link,headers=headers).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find('div',class_="entry-content single-page")
+#     news["News Description: "]=details.text      
+#     output.append(news)
+# with open("tridiuum-blog-data.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+#Silver cloud health press releases
+# import time
+# for page in range(1, 13):
+#   time.sleep(5)
+#   blog_url=f"https://www.silvercloudhealth.com/uk/press_releases/page/{page}"
+#   headers = requests.utils.default_headers()
+#   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#   page = requests.get(blog_url, headers=headers).text
+#   doc=BeautifulSoup(page, 'html.parser')
+#   items = doc.find_all('div', class_="blog-info-inner")
+#   for item in items:
+#     title =item.find('h2',class_="silver-heading")
+#     get_link = item.find('div',class_="excerpt").find('a')
+#     link=get_link.attrs['href']
+#     news={}
+#     news["Press Title"]=title.text
+#     headers = requests.utils.default_headers()
+#     headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#     get_details = requests.get(link,headers=headers).text 
+    
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find('div',class_="section post-body")
+#     news["Press Description"]=details.text      
+#     output.append(news)
+# with open("silver-cloud-health-press-releases.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+#Silver cloud health blogs 
+# import time
+# for page in range(1, 18):
+#   time.sleep(5)
+#   blog_url=f"https://www.silvercloudhealth.com/uk/blog/page/{page}"
+#   headers = requests.utils.default_headers()
+#   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#   page = requests.get(blog_url, headers=headers).text
+#   doc=BeautifulSoup(page, 'html.parser')
+#   items = doc.find_all('div', class_="blog-info-inner")
+#   for item in items:
+#     title =item.find('h2',class_="silver-heading")
+#     get_link = item.find('div',class_="excerpt").find('a')
+#     link=get_link.attrs['href']
+#     news={}
+#     news["Blog Title"]=title.text
+#     headers = requests.utils.default_headers()
+#     headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#     get_details = requests.get(link,headers=headers).text 
+#     detail_page = BeautifulSoup(get_details, 'html.parser')
+#     details=detail_page.find('div',class_="section post-body")
+#     news["Blog Description"]=details.text    
+#     output.append(news)
+# with open("silver-cloud-health-press-releases.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+  
+#Silver Cloud health content library  
+import time
+import io
+from PyPDF2 import PdfFileReader
+resource_url=f"https://www.silvercloudhealth.com/uk/resources"
+headers = requests.utils.default_headers()
+headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+page = requests.get(resource_url, headers=headers).text
+doc=BeautifulSoup(page, 'html.parser')
+items = doc.find_all('div', class_="resource")
+for item in items:
+  time.sleep(3)
+  title =item.find('div',class_="resource-heading")
+  get_link = item.find('a')
+  link=get_link.attrs['href']
+  details=item.find('div',class_="resource-description")
+  blog={}
+  blog["Resource Title"]=title.text
+  if "https://www.silvercloudhealth.com/" in link:
+    
+    if ".pdf" in link:
+      page = requests.get(link, headers=headers).text
+      doc=BeautifulSoup(page, 'html.parser')
+      details = doc.find('div',class_="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text")
+      
+      
+    else:
+      # creating a pdf file object 
+      pdfFileObj = open('link', 'rb') 
+          
+      # creating a pdf reader object 
+      pdfReader = PdfFileReader.PdfFileReader(pdfFileObj) 
+          
+      # printing number of pages in pdf file 
+      print(pdfReader.numPages) 
+          
+      # creating a page object 
+      pageObj = pdfReader.getPage(0) 
+          
+      # extracting text from page 
+      print(pageObj.extractText()) 
+          
+      # closing the pdf file object 
+      pdfFileObj.close() 
+      
+    blog["Resource Description"]=details.text
+  else:
+    blog["Resource Title"]=title.text
+    blog["Resource Link"]=link
+    blog["Resource Description"]=details.text
+  output.append(blog)
+  print(output)
+# with open("silver-cloud-health-resources.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')

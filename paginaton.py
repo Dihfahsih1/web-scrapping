@@ -8,9 +8,9 @@ with requests.Session() as s:
   s.headers = {'User-Agent':'Mozilla/5.0'}
   while True:
     page+=1
-    r = s.get(f'https://www.owl.health/newsroom/page/{page}/?et_blog')
+    r = s.get(f'https://tridiuum.com/category/news/page/{page}/')
     soup = bs(r.content, 'lxml')
-    next_page = soup.find('div',class_="pagination clearfix")
+    next_page = soup.find('div',class_="page-numbers nav-pagination links text-center")
     
     if next_page is None:
       break    
