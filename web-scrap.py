@@ -1,3 +1,4 @@
+from email.policy import strict
 from unicodedata import category
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
@@ -445,8 +446,8 @@ output=[]
   
 #Silver Cloud health content library  
 import time
-import io
-from PyPDF2 import PdfFileReader
+from io import StringIO,BytesIO
+from PyPDF2 import PdfFileReader, PdfFileWriter
 resource_url=f"https://www.silvercloudhealth.com/uk/resources"
 headers = requests.utils.default_headers()
 headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
@@ -462,40 +463,36 @@ for item in items:
   blog={}
   blog["Resource Title"]=title.text
   if "https://www.silvercloudhealth.com/" in link:
-    
-    if ".pdf" in link:
-      page = requests.get(link, headers=headers).text
-      doc=BeautifulSoup(page, 'html.parser')
-      details = doc.find('div',class_="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text")
-      
-      
-    else:
-      # creating a pdf file object 
-      pdfFileObj = open('link', 'rb') 
-          
-      # creating a pdf reader object 
-      pdfReader = PdfFileReader.PdfFileReader(pdfFileObj) 
-          
-      # printing number of pages in pdf file 
-      print(pdfReader.numPages) 
-          
-      # creating a page object 
-      pageObj = pdfReader.getPage(0) 
-          
-      # extracting text from page 
-      print(pageObj.extractText()) 
-          
-      # closing the pdf file object 
-      pdfFileObj.close() 
-      
-    blog["Resource Description"]=details.text
+    if ".jpg" not in link:
+      if ".pdf" not in link:
+        page = requests.get(link, headers=headers).text
+        doc=BeautifulSoup(page, 'html.parser')
+        details = doc.find('div',class_="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text")
+        
+        
+      else:
+        # creating a pdf file object 
+        pdfFileObj = requests.get(link)
+        writer = PdfFileWriter()
+        remoteFile = urlopen(Request(link)).read()
+        memoryFile = BytesIO(remoteFile)
+        pdfReader = PdfFileReader(memoryFile, strict=False)          
+        # creating a page object 
+        pageObj = pdfReader.getPage(0) 
+            
+        # extracting text from page 
+        details=pageObj.extractText()
+        
+        pdfFileObj.close()
+        print(details)
+        
+      blog["Resource Description"]=details
   else:
     blog["Resource Title"]=title.text
     blog["Resource Link"]=link
     blog["Resource Description"]=details.text
   output.append(blog)
-  print(output)
-# with open("silver-cloud-health-resources.txt", "a") as f:
-#   output=str(output)
-#   f.write(output)
-#   f.write('\n')
+with open("silver-cloud-health-resources.txt", "a") as f:
+  output=str(output)
+  f.write(output)
+  f.write('\n')
