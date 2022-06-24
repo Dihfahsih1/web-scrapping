@@ -12,6 +12,6 @@ driver = webdriver.Remote(service.service_url)
 
 driver.get('https://ksanahealth.com/mental-health-blog/');
 
-time.sleep(15) # Let the user actually see something!
+time.sleep(15)
 
 driver.quit()
