@@ -158,30 +158,30 @@ output=[]
 
 
 #Valant-blogs
-# for page in range(1, 29 ):
-#   req = Request(f"https://www.valant.io/blog/{page}", headers={'User-Agent': 'XYZ/3.0'})
+for page in range(1, 29 ):
+  req = Request(f"https://www.valant.io/blog/{page}", headers={'User-Agent': 'XYZ/3.0'})
 
-#   webpage = urlopen(req, timeout=100).read()
-#   news_doc=BeautifulSoup(webpage, 'html.parser')
-#   items = news_doc.find_all("div", class_="post-content-wrap")
+  webpage = urlopen(req, timeout=100).read()
+  news_doc=BeautifulSoup(webpage, 'html.parser')
+  items = news_doc.find_all("div", class_="post-content-wrap")
 
-#   for item in items:
+  for item in items:
     
-#     title =item.find('h3', class_="title")
-#     get_link = item.find('a')
-#     link=get_link.attrs['href']
-#     headers={'User-Agent': 'XYZ/3.0'}
-#     response = requests.get(link, headers=headers).text
-#     detail_page = BeautifulSoup(response, 'html.parser')
-#     details=detail_page.find("div",class_="content-inner")
-#     news={}
-#     news["Title"]=title.text
-#     news["Description"]=details.text
-#     output.append(news)  
-# with open("valant-blog.txt", "a") as f:
-#   output=str(output)
-#   f.write(output)
-#   f.write('\n')
+    title =item.find('h3', class_="title")
+    get_link = item.find('a')
+    link=get_link.attrs['href']
+    headers={'User-Agent': 'XYZ/3.0'}
+    response = requests.get(link, headers=headers).text
+    detail_page = BeautifulSoup(response, 'html.parser')
+    details=detail_page.find("div",class_="content-inner")
+    news={}
+    news["Title"]=title.text
+    news["Description"]=details.text
+    output.append(news)  
+with open("valant-blog.txt", "a") as f:
+  output=str(output)
+  f.write(output)
+  f.write('\n')
   
 #Valant-Webinars
 # for page in range(1, 3 ):
@@ -212,27 +212,27 @@ output=[]
 
 #Valant-case-studies
 
-req = Request(f"https://www.valant.io/resources/white-papers/", headers={'User-Agent': 'XYZ/3.0'})
+# req = Request(f"https://www.valant.io/resources/white-papers/", headers={'User-Agent': 'XYZ/3.0'})
 
-webpage = urlopen(req, timeout=100).read()
-news_doc=BeautifulSoup(webpage, 'html.parser')
-items = news_doc.find_all("div", class_="post-content-wrap")
+# webpage = urlopen(req, timeout=100).read()
+# news_doc=BeautifulSoup(webpage, 'html.parser')
+# items = news_doc.find_all("div", class_="post-content-wrap")
 
-for item in items:
+# for item in items:
   
-  title =item.find('h3', class_="title")
-  get_link = item.find('a')
-  link=get_link.attrs['href']
-  headers={'User-Agent': 'XYZ/3.0'}
-  response = requests.get(link, headers=headers).text
-  detail_page = BeautifulSoup(response, 'html.parser')
-  details=detail_page.find("div",class_="content-inner")
-  news={}
-  news["Title"]=title.text
-  news["Description"]=details.text
-  output.append(news)  
-with open("valant-white-papers.txt", "a") as f:
-  output=str(output)
-  f.write(output)
-  f.write('\n')
+#   title =item.find('h3', class_="title")
+#   get_link = item.find('a')
+#   link=get_link.attrs['href']
+#   headers={'User-Agent': 'XYZ/3.0'}
+#   response = requests.get(link, headers=headers).text
+#   detail_page = BeautifulSoup(response, 'html.parser')
+#   details=detail_page.find("div",class_="content-inner")
+#   news={}
+#   news["Title"]=title.text
+#   news["Description"]=details.text
+#   output.append(news)  
+# with open("valant-white-papers.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
 
