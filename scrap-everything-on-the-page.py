@@ -545,33 +545,144 @@ import ssl
 #   f.write('\n')
 
 
+########################mirah case-studies########################
+# output=[]
+# req = Request(f"https://www.mirah.com/case-studies", headers={'User-Agent': 'XYZ/3.0'})
 
-# ########################mirah case-studies########################
-output=[]
-req = Request(f"https://www.mirah.com/case-studies", headers={'User-Agent': 'XYZ/3.0'})
-
-webpage = urlopen(req,timeout=10).read()
-news_doc=BeautifulSoup(webpage, 'html.parser')
-items = news_doc.find_all("div", class_="list-item-content")
+# webpage = urlopen(req,timeout=10).read()
+# news_doc=BeautifulSoup(webpage, 'html.parser')
+# items = news_doc.find_all("div", class_="list-item-content")
   
-for item in items:
-  title =item.find('h2', class_="list-item-content__title")
-  print(title.text)
-  try:
-    get_link = item.find('a')
-    link=get_link.attrs['href']
-    headers={'User-Agent': 'XYZ/3.0'}
-    response = requests.get(link, headers=headers).text
-    detail_page = BeautifulSoup(response, 'html.parser')
-    details=detail_page.find("article",class_="section")
-    news={}
-    news["Title"]=title.text
+# for item in items:
+#   title =item.find('h2', class_="list-item-content__title")
+#   print(title.text)
+#   try:
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     headers={'User-Agent': 'XYZ/3.0'}
+#     response = requests.get(link, headers=headers).text
+#     detail_page = BeautifulSoup(response, 'html.parser')
+#     details=detail_page.find("article",class_="section")
+#     news={}
+#     news["Title"]=title.text
     
-    news["Description"]=details.text
-  except:
-    pass
-  output.append(news)  
-with open("mirah-blogs.txt", "a") as f:
+#     news["Description"]=details.text
+#   except:
+#     pass
+#   output.append(news)  
+# with open("mirah-blogs.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+########################################################################
+# Scrap Dynamic data from https://ksanahealth.com/mental-health-blog
+# /The website uses dynamically loaded conetnt using javascript, so i didn't scrap it like previously did for the rest but used 
+# 1: Right-click on page and select 'Inspect'.
+# 2 - Select 'Network' tab. 
+# 3: Click on the 'Show more' button. 
+# 4: See the ajax call (url) appearing in network tab  then check the ajax that loads the content and manually pick the url and use it after determining the number of pages on count of show more loads in this case they were for counts     
+
+#data scrapped on july 21 2022                                     
+#####################################################################
+
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+
+# output = []
+
+# r = requests.get(f'https://ksanahealth.com/wp-admin/admin-ajax.php?id=&post_id=107&slug=mental-health-blog&canonical_url=https%3A%2F%2Fksanahealth.com%2Fmental-health-blog%2F&posts_per_page=10&page=4&offset=0&post_type=post&repeater=default&seo_start_page=1&preloaded=false&preloaded_amount=0&order=DESC&orderby=date&action=alm_get_posts&query_type=standard', headers=headers)
+# soup = BeautifulSoup(r.json()['html'], 'html.parser')
+# for item in soup.select('div.post-item'):
+#   title=item.select_one('h4').text.strip()
+#   get_link=item.select_one('a.more-link').get('href')
+  
+#   response = requests.get(get_link, headers=headers).text
+#   detail_page = BeautifulSoup(response, 'html.parser')
+#   if 'https://ksanahealth.com/' in get_link:
+#     try:
+#       details=detail_page.select_one("div.blog-post__body")
+#       news={}
+#       news["Blog Title"]=title
+      
+#       news["Blog Description"]=details.text
+#       output.append(news) 
+#     except:
+#       pass
+# with open("ksanahealth-blogs.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+##########Scrap the ksanahealth Announcements ###########
+#data scrapped on july 21 2022      
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://ksanahealth.com/newsroom/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# data = soup.find('ul' ,class_='wp-block-latest-posts__list has-dates wp-block-latest-posts')
+# items = data.find_all('li')
+# for item in items:
+#   get_link=item.select_one('a.wp-block-latest-posts__post-title').get('href')
+#   if 'https://ksanahealth.com/' in get_link:
+#     response = requests.get(get_link, headers=headers).text
+#     detail_page = BeautifulSoup(response, 'html.parser')
+#     title=detail_page.select_one("h1.postmtitle")
+#     details=detail_page.select_one("div.blog-post__body")
+#     news={}
+#     news["Announcement Title"]=title.text
+#     news["Announcement Description"]=details.text
+#     output.append(news) 
+# with open("ksanahealth-Announcement.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+
+#######Scrap ksanahealth Product features - evidence part
+#data scrapped on july 21 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://ksanahealth.com/evidence/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="hs-evdnce-pg-inner")
+# output=output.text
+
+# with open("ksanahealth-products-evidence.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+  
+#######Scrap ksanahealth Product features - evidence part
+#data scrapped on july 21 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://ksanahealth.com/ears/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('main', class_="body-container-wrapper")
+# output=output.text
+
+# with open("ksanahealth-products-ears.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+
+#######Scrap ksanahealth Product features - evidence part
+#data scrapped on july 21 2022    
+headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+output = []
+r = Request(f'https://ksanahealth.com/vira/', headers=headers)
+webpage = urlopen(r,timeout=10).read()
+soup=BeautifulSoup(webpage, 'html.parser')
+output =soup.find('main', class_="body-container-wrapper")
+output=output.text
+
+with open("ksanahealth-products-viral-management.txt", "a") as f:
   output=str(output)
   f.write(output)
   f.write('\n')
