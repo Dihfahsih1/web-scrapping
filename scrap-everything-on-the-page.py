@@ -674,18 +674,181 @@ import ssl
 
 #######Scrap ksanahealth Product features - evidence part
 #data scrapped on july 21 2022    
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
-output = []
-r = Request(f'https://ksanahealth.com/vira/', headers=headers)
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://ksanahealth.com/vira/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('main', class_="body-container-wrapper")
+# output=output.text
+
+# with open("ksanahealth-products-viral-management.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+##########Scrap the futuresrecoveryhealthcare news pr ###########
+#data scrapped on july 21 2022      
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://futuresrecoveryhealthcare.com/news-pr/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# items = soup.find_all('a', class_="content-pane")
+# for item in items:
+#   try:
+#     get_link=item.get('href')
+#     if 'https://futuresrecoveryhealthcare.com' in get_link:
+#       response = requests.get(get_link, headers=headers).text
+#       detail_page = BeautifulSoup(response, 'html.parser')
+#       title=detail_page.select_one("header.entry-header")
+#       details=detail_page.select_one("div.entry-content")
+#       news={}
+#       news["News Title"]=title.text
+#       news["News Description"]=details.text
+#       output.append(news) 
+#   except:
+#     pass
+# with open("futuresrecoveryhealthcare-news-pr.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+##########Scrap the futuresrecoveryhealthcare Blogs ###########
+#data scrapped on july 21 2022      
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://futuresrecoveryhealthcare.com/blog/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# items = soup.find_all('a', class_="content-pane")
+# for item in items:
+#   try:
+#     get_link=item.get('href')
+#     if 'https://futuresrecoveryhealthcare.com' in get_link:
+#       response = requests.get(get_link, headers=headers).text
+#       detail_page = BeautifulSoup(response, 'html.parser')
+#       title=detail_page.select_one("h1.entry-title")
+#       dates=detail_page.select_one("div.entry-meta")
+#       details=detail_page.select_one("div.entry-content")
+#       news={}
+#       news["Blog Title"]=title.text
+#       news["Blog  Date"]=dates.text
+#       news["Blog Description"]=details.text
+#       output.append(news) 
+#   except:
+#     pass
+# with open("futuresrecoveryhealthcare-blogs.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+
+#######Scrap fit-outcomes Product features - evidence part
+#data scrapped on july 21 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://blog.fit-outcomes.com/en/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="site-content")
+# output=output.text
+
+# with open("fit-outcomes-blog.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+# #######Scrap fit-outcomes Product FAQ
+# #data scrapped on july 21 2022  
+# import urllib  
+# user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+# headers={'User-Agent':user_agent,} 
+# url='https://www.fit-outcomes.com/help/faq'
+# output = []
+# request = urllib.request.Request(url,None,headers)
+# webpage = request.urlopen(request).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# x =soup.find('div', class_="table-responsive vte3")
+# output=x.text
+
+# with open("fit-outcomes-FAQ.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+#######Scrap celesthealth News
+#data scrapped on july 23 2022  
+# import urllib  
+# user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+# headers={'User-Agent':user_agent,} 
+
+# r = Request(f'https://www.celesthealth.com/news.asp', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output = []
+# x =soup.find('div', class_="main_content_subPage")
+# output=x.text
+
+# with open("celesthealth-news.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+#######Scrap celesthealth Methods
+#data scrapped on july 23 2022  
+# import urllib  
+# user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+# headers={'User-Agent':user_agent,} 
+
+# r = Request(f'https://www.celesthealth.com/method.asp', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output = []
+# x =soup.find('div', class_="main_content_body")
+# output=x.text
+
+# with open("celesthealth-methods.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+#######Scrap celesthealth instruments
+#data scrapped on july 23 2022  
+# import urllib  
+# user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+# headers={'User-Agent':user_agent,} 
+
+# r = Request(f'https://www.celesthealth.com/instruments.asp', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output = []
+# x =soup.find('div', class_="main_content_body")
+# output=x.text
+
+# with open("celesthealth-instruments.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+  
+#######Scrap celesthealth instruments
+#data scrapped on july 23 2022  
+import urllib  
+user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+headers={'User-Agent':user_agent,} 
+
+r = Request(f'https://www.celesthealth.com/about.asp', headers=headers)
 webpage = urlopen(r,timeout=10).read()
 soup=BeautifulSoup(webpage, 'html.parser')
-output =soup.find('main', class_="body-container-wrapper")
-output=output.text
+output = []
+x =soup.find('div', class_="main_content_body")
+output=x.text
 
-with open("ksanahealth-products-viral-management.txt", "a") as f:
+with open("celesthealth-about.txt", "a") as f:
   output=str(output)
   f.write(output)
   f.write('\n')
-
-
-
