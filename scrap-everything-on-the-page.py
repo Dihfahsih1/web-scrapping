@@ -837,18 +837,386 @@ import ssl
   
 #######Scrap celesthealth instruments
 #data scrapped on july 23 2022  
-import urllib  
-user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
-headers={'User-Agent':user_agent,} 
+# import urllib  
+# user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+# headers={'User-Agent':user_agent,} 
 
-r = Request(f'https://www.celesthealth.com/about.asp', headers=headers)
+# r = Request(f'https://www.celesthealth.com/about.asp', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output = []
+# x =soup.find('div', class_="main_content_body")
+# output=x.text
+
+# with open("celesthealth-about.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+  
+# #mhoutcomes-Insights --> download brief description of the insights
+# output=[]
+# for page in range(1, 4 ):
+#   req = Request(f"https://mhoutcomes.com/insights/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
+
+#   webpage = urlopen(req,timeout=100).read()
+#   news_doc=BeautifulSoup(webpage, 'html.parser')
+#   items = news_doc.find_all("div", class_="blog-details-wrap clearfix")
+
+#   for item in items:
+#     try:
+      
+#       title =item.find('h3', itemprop="name headline")
+#       get_link = item.find('a',class_="link-to-post")
+#       link=get_link.attrs['href']
+      
+#       response = requests.get(link, {'User-Agent': 'XYZ/3.0'}).text
+#       soup = BeautifulSoup(response, 'html.parser')
+#       details=soup.find("section",class_="page-content clearfix container")
+#       news={}
+#       news["Insight Title"]=title.text
+#       news["Insight Description"]=details.text
+#       output.append(news)  
+#     except:
+#       pass
+# with open("mhoutcomes-Insights.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+  
+  
+#   #######Scrap outcomereferrals -about-mission
+# #data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/about-us/mission', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="sub-page-content-wrapper")
+# output=output.text
+
+# with open("outcomereferrals-about-mission.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+
+  #######Scrap outcomereferrals -about-history
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/about-us/history', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="sub-page-content-wrapper")
+# output=output.text
+
+# with open("outcomereferrals-about-history.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+#######Scrap outcomereferrals -about-team
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/about-us/team', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="sub-page-content-wrapper")
+# output=output.text
+
+# with open("outcomereferrals-about-team.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+#######Scrap outcomereferrals top-assessment/top-assessment
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/top-assessment/top-assessment', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="main-content")
+# output=output.text
+
+# with open("outcomereferrals-top-assessment-top-assessment.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')  
+  
+  
+  
+#######Scrap outcomereferrals top-assessment/top-assessment
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/outcome-measurement/outcome-measurement', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="main-content")
+# output=output.text
+
+# with open("outcomereferrals-outcome-measurement.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap outcomereferrals validation-articles
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/validation-research/validation-articles', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="main-content")
+# output=output.text
+
+# with open("outcomereferrals-validation-articles.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+# #######Scrap outcomereferrals validation-articles
+# #data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/child-welfare/child-welfare', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="main-content")
+# output=output.text
+
+# with open("outcomereferrals-child-welfare.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+
+
+#######Scrap outcomereferrals testimonies
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/child-welfare/testimonial-from-dr-drendel', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="main-content")
+# output=output.text
+
+# with open("outcomereferrals-testimonies.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap outcomereferrals joint-commission
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/joint-commission', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="main-content")
+# output=output.text
+
+# with open("outcomereferrals-joint-commission.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap visiontree homepage
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="flex-grow")
+# output=output.text
+
+# with open("visiontree-homepage.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap visiontree clinical
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/solutions/clinical/patient-centered-outcomes/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="flex flex-col h-screen")
+# output=output.text
+
+# with open("visiontree-clinical.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+# #######Scrap visiontree outcomes
+# #data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/solutions/research/patient-centered-outcomes/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="flex flex-col h-screen")
+# output=output.text
+
+# with open("visiontree-patient-centered-outcomes.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap visiontree solutions packages
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/solutions/packages/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8")
+# output=output.text
+
+# with open("visiontree-solution-packages.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap visiontree solutions-patient-portal
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/solutions/patient-portal/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8")
+# output=output.text
+
+# with open("visiontree-solutions-patient-portal.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+#######Scrap visiontree telehealth
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/telehealth-and-covid19-toolkit/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8")
+# output=output.text
+
+# with open("visiontree-telehealth.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+#######Scrap visiontree provenchoice
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/proven-choice/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8")
+# output=output.text
+
+# with open("visiontree-proven-choice.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap visiontree patients-reported-outcomes
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/patient-reported-outcomes/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8")
+# output=output.text
+
+# with open("visiontree-patient-reported-outcomes.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+
+
+#######Scrap visiontree macra-mips
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/macra-mips/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="flex-grow")
+# output=output.text
+
+# with open("visiontree-highlights.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+  
+  
+#######Scrap visiontree macra-mips
+#data scrapped on july 23 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/vtoc-roi/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8")
+# output=output.text
+
+# with open("visiontree-return-on-investiments.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
+
+
+##########Scrap the visiontree press release ###########
+#data scrapped on july 23 2022      
+headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+output = []
+r = Request(f'https://visiontree.com/press-releases/', headers=headers)
 webpage = urlopen(r,timeout=10).read()
 soup=BeautifulSoup(webpage, 'html.parser')
-output = []
-x =soup.find('div', class_="main_content_body")
-output=x.text
-
-with open("celesthealth-about.txt", "a") as f:
+data=soup.find('tbody',)
+items = data.find_all('tr')
+for item in items:
+  try:
+    get_link = item.find('a', class_='link')
+    Date=item.find('td', class_="px-6 py-4 align-top font-medium w-1/4")
+    
+    title=item.find('td', class_="px-6 py-4 text-gray-500")
+    link='https://visiontree.com'+get_link.attrs['href']
+    response = requests.get(link, headers=headers).text
+    detail_page = BeautifulSoup(response, 'html.parser')
+    details=detail_page.find("div", class_="pageWrap pageWrap--m")
+     
+    news={}
+    news["Press Date"]=Date.text
+    news["Press Title"]=title.text
+    news["Press Description"]=details.text
+    output.append(news) 
+  except:
+    pass
+with open("visiontree-press-releases.txt", "a") as f:
   output=str(output)
   f.write(output)
   f.write('\n')
+  
+##########visiontree case studies and patient voices are external links###########
