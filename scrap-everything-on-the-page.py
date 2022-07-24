@@ -1189,34 +1189,34 @@ import ssl
 
 ##########Scrap the visiontree press release ###########
 #data scrapped on july 23 2022      
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
-output = []
-r = Request(f'https://visiontree.com/press-releases/', headers=headers)
-webpage = urlopen(r,timeout=10).read()
-soup=BeautifulSoup(webpage, 'html.parser')
-data=soup.find('tbody',)
-items = data.find_all('tr')
-for item in items:
-  try:
-    get_link = item.find('a', class_='link')
-    Date=item.find('td', class_="px-6 py-4 align-top font-medium w-1/4")
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://visiontree.com/press-releases/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# data=soup.find('tbody',)
+# items = data.find_all('tr')
+# for item in items:
+#   try:
+#     get_link = item.find('a', class_='link')
+#     Date=item.find('td', class_="px-6 py-4 align-top font-medium w-1/4")
     
-    title=item.find('td', class_="px-6 py-4 text-gray-500")
-    link='https://visiontree.com'+get_link.attrs['href']
-    response = requests.get(link, headers=headers).text
-    detail_page = BeautifulSoup(response, 'html.parser')
-    details=detail_page.find("div", class_="pageWrap pageWrap--m")
+#     title=item.find('td', class_="px-6 py-4 text-gray-500")
+#     link='https://visiontree.com'+get_link.attrs['href']
+#     response = requests.get(link, headers=headers).text
+#     detail_page = BeautifulSoup(response, 'html.parser')
+#     details=detail_page.find("div", class_="pageWrap pageWrap--m")
      
-    news={}
-    news["Press Date"]=Date.text
-    news["Press Title"]=title.text
-    news["Press Description"]=details.text
-    output.append(news) 
-  except:
-    pass
-with open("visiontree-press-releases.txt", "a") as f:
-  output=str(output)
-  f.write(output)
-  f.write('\n')
+#     news={}
+#     news["Press Date"]=Date.text
+#     news["Press Title"]=title.text
+#     news["Press Description"]=details.text
+#     output.append(news) 
+#   except:
+#     pass
+# with open("visiontree-press-releases.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
   
 ##########visiontree case studies and patient voices are external links###########
