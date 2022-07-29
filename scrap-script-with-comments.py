@@ -126,12 +126,12 @@ webpage = urlopen(req, timeout=10).read()# timeout is used to create an interval
 for page in range(1, 4 ):
   req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'}) 
   
-  webpage = urlopen(req, timeout=100).read()
+  webpage = urlopen(req, timeout=100).read()# urlopen is a python module used to fetch urls, in this case it has been used to fetch the url we have named req, the .read() is used to read the webpage content
   news_doc=BeautifulSoup(webpage, 'html.parser')
-  items = news_doc.find_all(class_="entry-body")
+  items = news_doc.find_all(class_="entry-body")# entry-body is the class on the webpage with all the content we want to scrap. Items hold all contents found from the class entry-body
   
-  for item in items:
-    title =item.find(class_="entry-title")
+  for item in items: #to get individual item from the soup, we use the for loop to iterate through the items on the web page
+    title =item.find(class_="entry-title") # for each item, we use find to locate the class for the title which is "entry-title"
     get_link = item.find('a')
     link=get_link.attrs['href']
     headers={'User-Agent': 'XYZ/3.0'}
@@ -148,9 +148,8 @@ with open("mdlogix-news-data.txt", "a") as f:
   f.write(output)
   f.write('\n')
 
-#Simple url scraping
+#scrap greenspacehealth security data
 url_list="https://www.greenspacehealth.com/en-ca/security"
-# empty list to store all results
 req = requests.get(url_list)
 soup = BeautifulSoup(req.text, "html.parser")
 results=soup.find('div',class_="container w-container")
@@ -180,7 +179,7 @@ for result in results:
   link=link.attrs['href']
   
   test_cond = str(link)
-  if "holmusk.com" in test_cond:
+  if "holmusk.com" in test_cond:#the link returned mixed links even those linking to external websites so we use if statement to weed them out and remain with only those of holmusk which we want to scrap
     req = requests.get(link)
     soup = BeautifulSoup(req.text, "html.parser")
     results=soup.find_all('div',class_="container news-template w-container")
@@ -201,12 +200,12 @@ with open("holmusk-news-events-data.txt", "a") as f:
 
 
 # #owl-health-blog data   
-for page in range(1, 4):
-  blog_url=f"https://www.owl.health/blog/page/{page}/?et_blog"
+for page in range(1, 4): #we manually check the how many pages are in the pagination section and in this case they were 3, so we loop within that range starting from 1, in python the range does not include the last number so the range must contain a larger number than the desired so as to get correct results and that's why we used 4 instead of the 3
+  blog_url=f"https://www.owl.health/blog/page/{page}/?et_blog" # each number in the range will be inserted in the {page} e.g {3}
   page = requests.get(blog_url).text
   doc=BeautifulSoup(page, 'html.parser')
-  items = doc.find_all('div', class_="et_pb_salvattore_content")
-  for item in items:
+  items = doc.find_all('div', class_="et_pb_salvattore_content")# get all the content we need from a given webpage in this case each of the 3 pages
+  for item in items: # after getting all the contents from a given webpage, loop through the items to get individual item from the items
     title =item.find('h2',class_="entry-title")
     get_link = item.find('a')
     link=get_link.attrs['href']
@@ -214,14 +213,12 @@ for page in range(1, 4):
     get_details = requests.get(link).text 
     detail_page = BeautifulSoup(get_details, 'html.parser')
     details=detail_page.find(class_="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body")
-    
     blog={}
-    
-    try:
-      blog["Newa Title: "]=title.text
-      blog["News Description: "]=details.text
+    try:#for this specific webpage, some blog articles were just images or pdfs and never had either a title or description, we use the try block to weed out such exceptions that would cause the script to break because of Nonetype errors
+      blog["Blog Title: "]=title.text
+      blog["Blog Description: "]=details.text
     except:
-      pass
+      pass #in case there is a blog without a title or description, we skip and move to the next blog.
     output.append(blog)
 with open("owl-health-blogs-data.txt", "a") as f:
   output=str(output)
@@ -234,7 +231,7 @@ for page in range(1, 6):
   time.sleep(3)
   blog_url=f"https://tridiuum.com/category/news/page/{page}/"
   headers = requests.utils.default_headers()
-  headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+  headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})#The HTTP headers are used to allow our script to send additional information to the server and enable the server to provide additional information that we can scrap
   page = requests.get(blog_url, headers=headers).text
   doc=BeautifulSoup(page, 'html.parser')
   items = doc.find_all('div', class_="article-inner")
@@ -249,8 +246,6 @@ for page in range(1, 6):
     get_details = requests.get(link,headers=headers).text 
     detail_page = BeautifulSoup(get_details, 'html.parser')
     details=detail_page.find('div',class_="entry-content single-page")
-    # details.find('header',class_="entry-header").decompose()
-    # details.find('nav', class_="navigation-post").decompose()
     news["News Description: "]=details.text      
     output.append(news)
 with open("tridiuum-news-data.txt", "a") as f:
@@ -273,7 +268,7 @@ for page in range(1, 8):
     get_link = title.find('a')
     link=get_link.attrs['href']
     news={}
-    news["Newa Title: "]=title.text
+    news["News Title: "]=title.text
     headers = requests.utils.default_headers()
     headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
     get_details = requests.get(link,headers=headers).text 
@@ -291,9 +286,11 @@ import time
 for page in range(1, 13):
   time.sleep(5)
   blog_url=f"https://www.silvercloudhealth.com/uk/press_releases/page/{page}"
-  headers = requests.utils.default_headers()
-  headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
-  page = requests.get(blog_url, headers=headers).text
+  headers = requests.utils.default_headers()#this helps us to send the value of a user agent such as the browser while requesting for a webpage using python requests module;
+  
+  
+  headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})#we have explicitly set our user agent as Mozilla and this will update server whenever this script sends the request for the webpage.
+  page = requests.get(blog_url, headers=headers).text#this returns the text document from the url instead of the HTML document with tags and other undesired elements from the webpage
   doc=BeautifulSoup(page, 'html.parser')
   items = doc.find_all('div', class_="blog-info-inner")
   for item in items:
@@ -321,7 +318,7 @@ for page in range(1, 18):
   blog_url=f"https://www.silvercloudhealth.com/uk/blog/page/{page}"
   headers = requests.utils.default_headers()
   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
-  page = requests.get(blog_url, headers=headers).text
+  page = requests.get(blog_url, headers=headers, timeout=10).text # since we are scraping many pages from the website, this will send many requests to the server, to avoid our IP from being blocked, we use a timeout of 10s to put an interval between our requests and make the server happy and not stressed by too much requests at ago
   doc=BeautifulSoup(page, 'html.parser')
   items = doc.find_all('div', class_="blog-info-inner")
   for item in items:
@@ -344,6 +341,7 @@ with open("silver-cloud-health-press-releases.txt", "a") as f:
   
   
 #Silver Cloud health content library  
+from PyPDF2 import PdfFileReader, PdfFileWriter # install pypdf2 and then import classes for reading and writing pdf content to the file
 resource_url=f"https://www.silvercloudhealth.com/uk/resources"
 headers = requests.utils.default_headers()
 headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
@@ -351,15 +349,17 @@ page = requests.get(resource_url, headers=headers).text
 doc=BeautifulSoup(page, 'html.parser')
 items = doc.find_all('div', class_="resource")
 for item in items:
-  time.sleep(3)
   title =item.find('div',class_="resource-heading")
   get_link = item.find('a')
   link=get_link.attrs['href']
   details=item.find('div',class_="resource-description")
   blog={}
   blog["Resource Title"]=title.text
-  if "https://www.silvercloudhealth.com/" in link:
-    if ".jpg" not in link:
+  
+ 
+  if "https://www.silvercloudhealth.com/" in link:# the resources had links to external websites, since we want to scrap on this website, we check if the url contains this specific website, then we can scrap its data
+     
+    if ".jpg" not in link:#for this specific url, some links returned images and pdfs instead of the desired content with titles and description, so we used the if statements to weed these out and remain with only textual data
       if ".pdf" not in link:
         page = requests.get(link, headers=headers).text
         doc=BeautifulSoup(page, 'html.parser')
@@ -426,6 +426,7 @@ press_page = requests.get(press_url).text
 press_doc=BeautifulSoup(press_page, 'html.parser')
 items = press_doc.find_all(class_="elementor-post__text")
 for item in items:
+  #Due to sofisticated server blocking, this was done manually by passing the url to be scrapped in the script
   link="https://wesanahealth.com/in-the-news/wesana-health-ceo-daniel-carcillo-to-keynote-charles-river-symposium-re-imagining-substance-abuse-addiction-and-mental-health-disorders-with-psychedelic-therapies/"
   headers={'User-Agent': 'XYZ/3.0'}
   response = requests.get(link, headers=headers).text
@@ -532,8 +533,8 @@ url_list="https://ir.wesanahealth.com/company-information/faq"
 headers={'User-Agent': 'XYZ/3.0'}
 req = requests.get(url_list,headers=headers )
 soup = BeautifulSoup(req.text, "html.parser")
-#results=soup.find('div',class_="container w-container")
-results=soup.find_all(['dt','dd'])
+ 
+results=soup.find_all(['dt','dd'])#We find all the instances of data in a table in the soup
 for result in results:
   output=result.text
   with open("wesanahealth-FAQ-data.txt", "a") as f:
@@ -545,7 +546,7 @@ for result in results:
 for page in range(1, 29 ):
   req = Request(f"https://www.valant.io/blog/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
 
-  webpage = urlopen(req,timeout=100).read()
+  webpage = urlopen(req,timeout=100).read() # we use a timout of 100s to avoid bombarding the server with to much traffic at ago, this slows down our scraping speed and requires stable internet to maitain the hold time sice we are scrapping many pages
   news_doc=BeautifulSoup(webpage, 'html.parser')
   items = news_doc.find_all("div", class_="post-content-wrap")
 
@@ -570,7 +571,7 @@ with open("valant-blog.txt", "a") as f:
 for page in range(1, 3 ):
   req = Request(f"https://www.valant.io/webinars/page/{page}", headers={'User-Agent': 'XYZ/3.0'})
 
-  webpage = urlopen(req, timeout=100).read()
+  webpage = urlopen(req, timeout=10).read()
   news_doc=BeautifulSoup(webpage, 'html.parser')
   items = news_doc.find_all("div", class_="post-content-wrap")
   for item in items:
@@ -969,11 +970,11 @@ headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20
 
 output = []
 
-r = requests.get(f'https://ksanahealth.com/wp-admin/admin-ajax.php?id=&post_id=107&slug=mental-health-blog&canonical_url=https%3A%2F%2Fksanahealth.com%2Fmental-health-blog%2F&posts_per_page=10&page=4&offset=0&post_type=post&repeater=default&seo_start_page=1&preloaded=false&preloaded_amount=0&order=DESC&orderby=date&action=alm_get_posts&query_type=standard', headers=headers)
+r = requests.get(f'https://ksanahealth.com/wp-admin/admin-ajax.php?id=&post_id=107&slug=mental-health-blog&canonical_url=https%3A%2F%2Fksanahealth.com%2Fmental-health-blog%2F&posts_per_page=10&page=4&offset=0&post_type=post&repeater=default&seo_start_page=1&preloaded=false&preloaded_amount=0&order=DESC&orderby=date&action=alm_get_posts&query_type=standard', headers=headers)#here we are passing in the url we got from the network tab after loading the dynamic page, this would better be done using selenium but we opted for beautiful soup to maintain the consistency of our scrap script
 soup = BeautifulSoup(r.txt()['html'], 'html.parser')
-for item in soup.select('div.post-item'):
+for item in soup.select('div.post-item'): #using select here is the same as using find_all data in the soup
   title=item.select_one('h4').text.strip()
-  get_link=item.select_one('a.more-link').get('href')
+  get_link=item.select_one('a.more-link').get('href')# select_one is the same as using find
   
   response = requests.get(get_link, headers=headers).text
   detail_page = BeautifulSoup(response, 'html.parser')
@@ -1947,7 +1948,7 @@ with open("mirah-for-our-team.txt", "a") as f:
 
 
 ###############################REMAINING WEBSITES TO BE SCRAPPED#############################
-scrapped on 1 August
+#scrapped on 1 August
 for page in range(1, 11 ):
   req = Request(f"https://blog.nview.com/page/{page}", headers={'User-Agent': 'XYZ/3.0'})
 
@@ -2071,14 +2072,14 @@ with open("owl-health-system.txt", "a") as f:
   f.write('\n')
 
 
-media-hits data of owl-health  
+#media-hits data of owl-health  
 import time
 for page in range(1, 32):
   time.sleep(3)
   blog_url=f"https://www.owl.health/newsroom/page/{page}/?et_blog"
   headers = requests.utils.default_headers()
   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
-  page = requests.get(blog_url, headers=headers).text
+  page = requests.get(blog_url, headers=headers, timeout=10).text
   doc=BeautifulSoup(page, 'html.parser')
   items = doc.find_all('div', class_="et_pb_salvattore_content")
   for item in items:
@@ -2117,7 +2118,6 @@ for page in range(1, 16):
     title =item.find('h2', class_="blog-entry-title entry-title")
     get_link = title.find('a')
     link=get_link.attrs['href']
-    print(link)
     headers={'User-Agent': 'XYZ/3.0'}
     response = requests.get(link, headers=headers).text
     detail_page = BeautifulSoup(response, 'html.parser')
@@ -2133,3 +2133,62 @@ with open("azzly-Blogs.txt", "a",encoding='utf-8') as f:
   output=str(output)
   f.write(output)
   f.write('\n')
+  
+################## RESOURCE REFERENCES########################
+
+'''
+In due course of web scrapping, we might face several challenges, but these problems have been faced by many other people in scrapping community and have provided solutions to how they fixed these problems,
+below are some of the challenges faced and the resources that helped to fix them
+
+ 1. To get started with beautiful soup documentation use the link below
+      Solution: https://www.crummy.com/software/BeautifulSoup/bs3/documentation.html
+    
+ 2. Problem, how to open pdf webpages:
+      solution: https://stackoverflow.com/questions/9751197/opening-pdf-urls-with-pypdf
+    
+ 3. How to use the PyPDF2 module to read and write content
+      solution: https://pypi.org/project/PyPDF2/
+    
+ 4. Passing additional information using headers
+      solution: https://www.geeksforgeeks.org/python-requests-post-request-with-headers-and-body/
+    
+ 5. Several websites were blocking our requests to their servers
+      Solution: https://stackoverflow.com/questions/43440397/requests-using-beautiful-soup-gets-
+    
+ 6. Choosing the proper python encoding for the scraped data to be written to a file or being saved
+      Solution: https://stackoverflow.com/questions/491921/unicode-utf-8-reading-and-writing-to-files-in-python
+    
+ 7. Writing or saving to file that content that has been scrapped using beautiful soup package
+    Solution: https://stackoverflow.com/questions/65815005/beautifulsoup-4-python-web-scraping-to-txt-file
+  
+ 8. How to efficiently scrap data from dynamic websites using Selenium?
+  
+   " You don't need selenium for this. When a page is loaded dynamically, you can look up in Network tab which urls are being accessed. The following code will get you started - returning a dataframe with blog title & url. You can further access those urls. Do tell if you need guidance."...answer by https://stackoverflow.com/users/19475185/platipus-on-fire
+    
+    Solution: https://stackoverflow.com/questions/73056468/how-to-efficiently-scrap-data-from-dynamic-websites-using-selenium  
+    
+ 9. Creatig a pdf object
+      Solution: https://www.geeksforgeeks.org/working-with-pdf-files-in-python/
+    
+ 10. Scraping paginated pages
+    paginated pages can be tricky to scrap because most of them hide their implementation from the html by using javascript to load their pages with the links to the content.
+    For this project we manually had to get the number of paginated pages with the content we want and then pass the maximum number using the range python class
+    
+      Link to pagination implementation in beautiful soup: https://stackoverflow.com/questions/54096972/scraping-paginated-results-using-python-beautifulsoup-3
+    
+ 11. How to append beautiful soup data to a list so that it is saved as a single file
+      Solution: https://www.anycodings.com/1questions/114656/how-to-append-my-web-scraping-data-into-a-list
+
+ 12. How to fix the error "'page' is not defined"
+      Solution: https://stackoverflow.com/questions/65500904/web-scraping-using-python-and-beautiful-soup-error-page-is-not-defined
+      
+ 13. How to fix urllib.request 403 Forbidden  when accessing a webpage through a script
+      Solution: https://stackoverflow.com/questions/41214965/python-3-5-urllib-request-403-forbidden-error
+      
+ 14. Fixing the attributeerror when the script is run
+      Solution: https://www.geeksforgeeks.org/beautifulsoup-error-handling/#:~:text=The%20AttributeError%20in%20BeautifulSoup%20is,that%20function%20then%20AttributeError%20occurs.
+      
+ 15. Solving the Nonetype error when accessing itemes of class on a soup
+      Solutions: https://stackoverflow.com/questions/33774409/beautifulsoup-error-handling-when-find-returns-nonetype 
+'''
+################## End of the Script ########################
