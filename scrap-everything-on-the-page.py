@@ -1,7 +1,7 @@
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
-import requests
-import ssl
+# import requests
+# import ssl
 # ssl._create_default_https_context = ssl._create_unverified_context
 # import json
 # output=[]
@@ -1220,3 +1220,18 @@ import ssl
 #   f.write('\n')
   
 ##########visiontree case studies and patient voices are external links###########
+
+#######Scrap visiontree homepage
+#data scrapped on july 30 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://azzly.com/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="vc_row wpb_row vc_inner vc_row-fluid vc_column-gap-20 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex")
+# output=output.text
+
+# with open("azzly-testimonies.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n') 
