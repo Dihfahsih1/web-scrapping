@@ -497,28 +497,28 @@ output=[]
 
 
 #oqmeasures-news
-url="https://www.oqmeasures.com/category/oq-news/"
-headers = requests.utils.default_headers()
-headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
-req = requests.get(url, headers=headers)
-soup = BeautifulSoup(req.text, "html.parser")
-main=soup.find('main',class_="site-main")
-results=main.find_all('div', class_="card-body")
-for result in results:
-  title=result.find('h2', class_="entry-title card-title h3")
-  link = title.find('a', class_="text-dark")
-  link=link.attrs['href']
-  req = requests.get(link, headers=headers)
-  soup = BeautifulSoup(req.text, "html.parser")
-  details=soup.find('div',class_="card-body")
-  if details is not None:
-    details.find('header', class_="entry-header").decompose()
-    press={}
-    press["News Title"]=title.text
-    press["Details"]=details.text
-    output.append(press)
+# url="https://www.oqmeasures.com/category/oq-news/"
+# headers = requests.utils.default_headers()
+# headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+# req = requests.get(url, headers=headers)
+# soup = BeautifulSoup(req.text, "html.parser")
+# main=soup.find('main',class_="site-main")
+# results=main.find_all('div', class_="card-body")
+# for result in results:
+#   title=result.find('h2', class_="entry-title card-title h3")
+#   link = title.find('a', class_="text-dark")
+#   link=link.attrs['href']
+#   req = requests.get(link, headers=headers)
+#   soup = BeautifulSoup(req.text, "html.parser")
+#   details=soup.find('div',class_="card-body")
+#   if details is not None:
+#     details.find('header', class_="entry-header").decompose()
+#     press={}
+#     press["News Title"]=title.text
+#     press["Details"]=details.text
+#     output.append(press)
   
-with open("oqmeasures-news.text", "a") as f:
-  output=str(output)
-  f.write(output)
+# with open("oqmeasures-news.text", "a") as f:
+#   output=str(output)
+#   f.write(output)
 
