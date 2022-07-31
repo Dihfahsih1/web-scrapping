@@ -1,74 +1,21 @@
+from typing import ItemsView
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
-# from email.policy import strict
-# from unicodedata import category
-# from urllib.request import Request, urlopen
-# from bs4 import BeautifulSoup
-# import requests
-# import ssl
+# # from email.policy import strict
+# # from unicodedata import category
+# # from urllib.request import Request, urlopen
+# # from bs4 import BeautifulSoup
+import requests
+# # import ssl
 
-# ssl._create_default_https_context = ssl._create_unverified_context
+# # ssl._create_default_https_context = ssl._create_unverified_context
 
 # import json
 output=[]
 
-# #https://www.owl.health
-# news_url="https://www.owl.health/category/media-hits/"
-# news_page = requests.get(news_url).text
-# news_doc=BeautifulSoup(news_page, 'html.parser')
-# news_pages = int(news_doc.find(class_='alignleft').a['href'].split('/')[-2])
-
-# for page in range(1, news_pages + 1 ):
-#   new_url=f"https://www.owl.health/category/media-hits/page/{page}/?et_blog"
-#   news_page = requests.get(news_url).text
-#   news_doc=BeautifulSoup(news_page, 'html.parser')
-#   items = news_doc.find_all(class_="et_pb_post")
-#   for item in items:
-#     title =item.find(class_="entry-title")
-#     get_link = item.find('a')
-#     link=get_link.attrs['href']
-#     get_details = requests.get(link).text 
-#     detail_page = BeautifulSoup(get_details, 'html.parser')
-#     details=detail_page.find(class_="field-name-body")
-#     news={}
-#     news["News Title: "]=title.text
-#     try:
-#       news["News Description: "]=details.text
-#     except:
-#       pass
-    
-#     output.append(news)
-
-#https://azzly.com/blog/
-
-# for page in range(1, 16):
-#   press_url=f"https://azzly.com/blog/page/{page}"
-#   press_page = requests.get(press_url).text
-#   press_doc=BeautifulSoup(press_page, 'html.parser')
-#   items = press_doc.find_all(class_="blog-entry")
-#   for item in items:
-#     title =item.find(class_="blog-entry-title")
-#     get_link = item.find('a')
-#     link=get_link.attrs['href']
-#     get_details = requests.get(link).text 
-#     detail_page = BeautifulSoup(get_details, 'html.parser')
-#     details=detail_page.find(class_="single-blog-content")
-#     press={}
-#     press["Press Title: "]=title.text
-#     try:
-#       press["Press Description: "]=details.text
-#     except:
-#       pass
-    
-#     output.append(press)    
-    
-# with open("azzly-new-blog-data.json", "w") as f:
-#   json.dump(output, f, indent=2)
   
-  
-  
-#Betteroutcomenow
+# B#etteroutcomenow
 # archive_url="https://blog.betteroutcomesnow.com/archive/2022"
 # press_urls=int(archive_url.split('/')[-1])
 
@@ -137,7 +84,7 @@ output=[]
 
 
 
-#https://www.blueprint-health.com/
+# #https://www.blueprint-health.com/
 # press_url="https://www.blueprint-health.com/blog"
 # press_page = requests.get(press_url).text
 # press_doc=BeautifulSoup(press_page, 'html.parser')
@@ -168,7 +115,7 @@ output=[]
 #   json.dump(output, f, indent=2)
 
 
-#https://www.greenspacehealth.com/en-ca/
+# #https://www.greenspacehealth.com/en-ca/
 # press_url="https://www.greenspacehealth.com/en-ca/blog"
 # press_page = requests.get(press_url).text
 # press_doc=BeautifulSoup(press_page, 'html.parser')
@@ -192,7 +139,7 @@ output=[]
 # with open("greenspacehealth-blog-data.json", "a") as f:
 #   json.dump(output, f, indent=2)
   
- #https://mdlogix.com
+# #https://mdlogix.com
 # req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
 # webpage = urlopen(req, timeout=10).read()
 # for page in range(1, 4 ):
@@ -220,7 +167,7 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-#Simple url scraping
+# #Simple url scraping
 # url_list="https://www.greenspacehealth.com/en-ca/security"
 # # empty list to store all results
 # req = requests.get(url_list)
@@ -239,8 +186,7 @@ output=[]
 #   json.dump(output, f, indent=2)
 
 
-
-#https://www.holmusk.com/publications
+# #https://www.holmusk.com/publications
 # url="https://www.holmusk.com/news"
 # req = requests.get(url)
 # soup = BeautifulSoup(req.text, "html.parser")
@@ -330,7 +276,7 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-#tridiuum news data
+# #tridiuum news data
 # import time
 # for page in range(1, 6):
 #   time.sleep(3)
@@ -389,7 +335,7 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-#Silver cloud health press releases
+# #Silver cloud health press releases
 # import time
 # for page in range(1, 13):
 #   time.sleep(5)
@@ -418,7 +364,7 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
   
-#Silver cloud health blogs 
+# #Silver cloud health blogs 
 # import time
 # for page in range(1, 18):
 #   time.sleep(5)
@@ -447,7 +393,7 @@ output=[]
 #   f.write('\n')
   
   
-#Silver Cloud health content library  
+# #Silver Cloud health content library  
 # import time
 # from io import StringIO,BytesIO
 # from PyPDF2 import PdfFileReader, PdfFileWriter
@@ -499,7 +445,7 @@ output=[]
 #   f.write(output)
 
 
-#oqmeasures-news
+# #oqmeasures-news
 # url="https://www.oqmeasures.com/category/oq-news/"
 # headers = requests.utils.default_headers()
 # headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
@@ -652,32 +598,6 @@ output=[]
 #     f.write('\n')
 
 
-# # not-working
-# # req = Request(f"https://visiontree.com/press-releases/", headers={'User-Agent': 'XYZ/3.0'})
-# # webpage = urlopen(req, timeout=100).read()
-# # news_doc=BeautifulSoup(webpage, 'html.parser')
-# # items = news_doc.find_all("tbody")
-# # for item in items:
-# #   data =item.find('td', class_="px-6 py-4 text-gray-500")
-# #   get_link = data.find('a')
-# #   link="https://visiontree.com/press-releases"+ get_link.attrs['href']
-# #   headers={'User-Agent': 'XYZ/3.0'}
-# #   response = requests.get(link, headers=headers).text
-# #   detail_page = BeautifulSoup(response, 'html.parser')
-# #   print(detail_page.text)
-# #   details=detail_page.find("div",class_="pageWrap pageWrap--m")
-  
-# #   title=detail_page.find('div',class_="relative")
-# #   detail_page.find('div', class_="flex items-center justify-between mb-6").decompose()
-# #   news={}
-# #   news["Title"]=title.text
-# #   news["Description"]=details.text
-# #   output.append(news) 
-  
-# # with open("visiontree-press-releases.txt", "a") as f:
-# #   output=str(output)
-# #   f.write(output)
-# #   f.write('\n')
 
 
 # #Valant-blogs
@@ -732,7 +652,7 @@ output=[]
 #   f.write('\n')
   
 
-# Valant-case-studies
+# #Valant-case-studies
 
 # req = Request(f"https://www.valant.io/resources/white-papers/", headers={'User-Agent': 'XYZ/3.0'})
 
@@ -758,7 +678,7 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-# #https://blog.nview.com/
+#https://blog.nview.com/
 # for page in range(1, 10 ):
 #   req = Request(f"https://blog.nview.com/page/{page}", headers={'User-Agent': 'XYZ/3.0'})
 
@@ -769,7 +689,7 @@ output=[]
 #   for item in items:
 #     title =item.find('h4', class_="blog-index-title")
     
-#     get_link = item.find('a')
+#     get_link = title.find('a')
 #     link=get_link.attrs['href']
 #     headers={'User-Agent': 'XYZ/3.0'}
 #     response = requests.get(link, headers=headers).text
@@ -1068,7 +988,7 @@ output=[]
 #   f.write('\n')
 
 
-########################mirah case-studies########################
+# #######################mirah case-studies########################
 # output=[]
 # req = Request(f"https://www.mirah.com/case-studies", headers={'User-Agent': 'XYZ/3.0'})
 
@@ -1085,7 +1005,7 @@ output=[]
 #     headers={'User-Agent': 'XYZ/3.0'}
 #     response = requests.get(link, headers=headers).text
 #     detail_page = BeautifulSoup(response, 'html.parser')
-#     details=detail_page.find("article",class_="section")
+#     details=detail_page.find("article",class_="sections")
 #     news={}
 #     news["Title"]=title.text
     
@@ -1093,12 +1013,12 @@ output=[]
 #   except:
 #     pass
 #   output.append(news)  
-# with open("mirah-blogs.txt", "a") as f:
+# with open("mirah-case-studies.txt", "a") as f:
 #   output=str(output)
 #   f.write(output)
 #   f.write('\n')
   
-########################################################################
+# #######################################################################
 # Scrap Dynamic data from https://ksanahealth.com/mental-health-blog
 # /The website uses dynamically loaded conetnt using javascript, so i didn't scrap it like previously did for the rest but used 
 # 1: Right-click on page and select 'Inspect'.
@@ -1106,8 +1026,8 @@ output=[]
 # 3: Click on the 'Show more' button. 
 # 4: See the ajax call (url) appearing in network tab  then check the ajax that loads the content and manually pick the url and use it after determining the number of pages on count of show more loads in this case they were for counts     
 
-#data scrapped on july 21 2022                                     
-#####################################################################
+# data scrapped on july 21 2022                                     
+# ####################################################################
 
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 
@@ -1137,8 +1057,8 @@ output=[]
 #   f.write('\n')
 
 
-##########Scrap the ksanahealth Announcements ###########
-#data scrapped on july 21 2022      
+# #########Scrap the ksanahealth Announcements ###########
+# ##data scrapped on july 21 2022      
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://ksanahealth.com/newsroom/', headers=headers)
@@ -1163,8 +1083,8 @@ output=[]
 #   f.write('\n')
   
 
-#######Scrap ksanahealth Product features - evidence part
-#data scrapped on july 21 2022    
+# ######Scrap ksanahealth Product features - evidence part
+# #data scrapped on july 21 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://ksanahealth.com/evidence/', headers=headers)
@@ -1179,8 +1099,8 @@ output=[]
 #   f.write('\n')
   
   
-#######Scrap ksanahealth Product features - evidence part
-#data scrapped on july 21 2022    
+# ######Scrap ksanahealth Product features - evidence part
+# #data scrapped on july 21 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://ksanahealth.com/ears/', headers=headers)
@@ -1195,8 +1115,8 @@ output=[]
 #   f.write('\n')
   
 
-#######Scrap ksanahealth Product features - evidence part
-#data scrapped on july 21 2022    
+# ######Scrap ksanahealth Product features - evidence part
+# #data scrapped on july 21 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://ksanahealth.com/vira/', headers=headers)
@@ -1210,8 +1130,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-##########Scrap the futuresrecoveryhealthcare news pr ###########
-#data scrapped on july 21 2022      
+# #########Scrap the futuresrecoveryhealthcare news pr ###########
+# #data scrapped on july 21 2022      
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://futuresrecoveryhealthcare.com/news-pr/', headers=headers)
@@ -1238,8 +1158,8 @@ output=[]
 #   f.write('\n')
 
 
-##########Scrap the futuresrecoveryhealthcare Blogs ###########
-#data scrapped on july 21 2022      
+# #########Scrap the futuresrecoveryhealthcare Blogs ###########
+# #data scrapped on july 21 2022      
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://futuresrecoveryhealthcare.com/blog/', headers=headers)
@@ -1268,8 +1188,8 @@ output=[]
 #   f.write('\n')
   
 
-#######Scrap fit-outcomes Product features - evidence part
-#data scrapped on july 21 2022    
+# ######Scrap fit-outcomes Product features - evidence part
+# #data scrapped on july 21 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://blog.fit-outcomes.com/en/', headers=headers)
@@ -1302,8 +1222,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-#######Scrap celesthealth News
-#data scrapped on july 23 2022  
+# ######Scrap celesthealth News
+# #data scrapped on july 23 2022  
 # import urllib  
 # user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 # headers={'User-Agent':user_agent,} 
@@ -1320,8 +1240,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
   
-#######Scrap celesthealth Methods
-#data scrapped on july 23 2022  
+# ######Scrap celesthealth Methods
+# #data scrapped on july 23 2022  
 # import urllib  
 # user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 # headers={'User-Agent':user_agent,} 
@@ -1339,8 +1259,8 @@ output=[]
 #   f.write('\n')
 
 
-#######Scrap celesthealth instruments
-#data scrapped on july 23 2022  
+# ######Scrap celesthealth instruments
+# #data scrapped on july 23 2022  
 # import urllib  
 # user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 # headers={'User-Agent':user_agent,} 
@@ -1358,8 +1278,8 @@ output=[]
 #   f.write('\n')
   
   
-#######Scrap celesthealth instruments
-#data scrapped on july 23 2022  
+# ######Scrap celesthealth instruments
+# #data scrapped on july 23 2022  
 # import urllib  
 # user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 # headers={'User-Agent':user_agent,} 
@@ -1426,8 +1346,8 @@ output=[]
 
 
 
-  #######Scrap outcomereferrals -about-history
-#data scrapped on july 23 2022    
+#   ######Scrap outcomereferrals -about-history
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/about-us/history', headers=headers)
@@ -1441,8 +1361,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
   
-#######Scrap outcomereferrals -about-team
-#data scrapped on july 23 2022    
+# ######Scrap outcomereferrals -about-team
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/about-us/team', headers=headers)
@@ -1456,8 +1376,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-#######Scrap outcomereferrals top-assessment/top-assessment
-#data scrapped on july 23 2022    
+# ######Scrap outcomereferrals top-assessment/top-assessment
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/top-assessment/top-assessment', headers=headers)
@@ -1473,8 +1393,8 @@ output=[]
   
   
   
-#######Scrap outcomereferrals top-assessment/top-assessment
-#data scrapped on july 23 2022    
+# ######Scrap outcomereferrals top-assessment/top-assessment
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/outcome-measurement/outcome-measurement', headers=headers)
@@ -1489,8 +1409,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap outcomereferrals validation-articles
-#data scrapped on july 23 2022    
+# ######Scrap outcomereferrals validation-articles
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/validation-research/validation-articles', headers=headers)
@@ -1521,8 +1441,8 @@ output=[]
 #   f.write('\n') 
 
 
-#######Scrap outcomereferrals testimonies
-#data scrapped on july 23 2022    
+# ######Scrap outcomereferrals testimonies
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/child-welfare/testimonial-from-dr-drendel', headers=headers)
@@ -1537,8 +1457,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap outcomereferrals joint-commission
-#data scrapped on july 23 2022    
+# ######Scrap outcomereferrals joint-commission
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'http://www.outcomereferrals.com/main/sub-page/category/joint-commission', headers=headers)
@@ -1553,8 +1473,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap visiontree homepage
-#data scrapped on july 23 2022    
+# ######Scrap visiontree homepage
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/', headers=headers)
@@ -1569,8 +1489,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap visiontree clinical
-#data scrapped on july 23 2022    
+# ######Scrap visiontree clinical
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/solutions/clinical/patient-centered-outcomes/', headers=headers)
@@ -1600,8 +1520,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap visiontree solutions packages
-#data scrapped on july 23 2022    
+# ######Scrap visiontree solutions packages
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/solutions/packages/', headers=headers)
@@ -1616,8 +1536,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap visiontree solutions-patient-portal
-#data scrapped on july 23 2022    
+# ######Scrap visiontree solutions-patient-portal
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/solutions/patient-portal/', headers=headers)
@@ -1631,8 +1551,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n') 
   
-#######Scrap visiontree telehealth
-#data scrapped on july 23 2022    
+# ######Scrap visiontree telehealth
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/telehealth-and-covid19-toolkit/', headers=headers)
@@ -1646,8 +1566,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n') 
   
-#######Scrap visiontree provenchoice
-#data scrapped on july 23 2022    
+# ######Scrap visiontree provenchoice
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/proven-choice/', headers=headers)
@@ -1662,8 +1582,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap visiontree patients-reported-outcomes
-#data scrapped on july 23 2022    
+# ######Scrap visiontree patients-reported-outcomes
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/patient-reported-outcomes/', headers=headers)
@@ -1678,8 +1598,8 @@ output=[]
 #   f.write('\n') 
 
 
-#######Scrap visiontree macra-mips
-#data scrapped on july 23 2022    
+# ######Scrap visiontree macra-mips
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/macra-mips/', headers=headers)
@@ -1694,8 +1614,8 @@ output=[]
 #   f.write('\n') 
   
   
-#######Scrap visiontree macra-mips
-#data scrapped on july 23 2022    
+# ######Scrap visiontree macra-mips
+# #data scrapped on july 23 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/vtoc-roi/', headers=headers)
@@ -1710,8 +1630,8 @@ output=[]
 #   f.write('\n') 
 
 
-##########Scrap the visiontree press release ###########
-#data scrapped on july 23 2022      
+# #########Scrap the visiontree press release ###########
+# #data scrapped on july 23 2022      
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://visiontree.com/press-releases/', headers=headers)
@@ -1742,10 +1662,10 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
   
-##########visiontree case studies and patient voices are external links###########
+# #########visiontree case studies and patient voices are external links###########
 
-#######Scrap azzly homepage
-#data scrapped on july 30 2022    
+# ######Scrap azzly homepage
+# #data scrapped on july 30 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://azzly.com/', headers=headers)
@@ -1760,8 +1680,8 @@ output=[]
 #   f.write('\n') 
 
 
-#######Scrap about better outcomes
-#data scrapped on july 30 2022    
+# ######Scrap about better outcomes
+# #data scrapped on july 30 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://betteroutcomesnow.com/about-bon/', headers=headers)
@@ -1791,8 +1711,8 @@ output=[]
 #   f.write('\n') 
 
 
-#######Scrap about better outcomes top tens
-#data scrapped on july 30 2022    
+# ######Scrap about better outcomes top tens
+# #data scrapped on july 30 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://betteroutcomesnow.com/about-pcoms/top-ten/', headers=headers)
@@ -1825,8 +1745,8 @@ output=[]
 #   f.write('\n') 
 
 
-#######Scrap about better outcomes pcoms-evidence-based-practic
-#data scrapped on july 30 2022    
+# ######Scrap about better outcomes pcoms-evidence-based-practic
+# #data scrapped on july 30 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://betteroutcomesnow.com/about-pcoms/pcoms-implementation/', headers=headers)
@@ -1902,8 +1822,8 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-#######Scrap bhworks-for-healthcare-providers
-#data scrapped on july 30 2022    
+# ######Scrap bhworks-for-healthcare-providers
+# #data scrapped on july 30 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
 # r = Request(f'https://mdlogix.com/for-healthcare-providers/', headers=headers)
@@ -1979,7 +1899,7 @@ output=[]
 #   f.write(output)
 #   f.write('\n')
 
-#######Scrap blueprint-health-who-we-serve
+# ######Scrap blueprint-health-who-we-serve
 # # #data scrapped on july 31 2022    
 # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
 # output = []
@@ -1995,20 +1915,225 @@ output=[]
 #   f.write('\n')
 
 
-#######Scrap blueprint-solutions-assessments
-# # #data scrapped on july 31 2022    
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
-output = []
-r = Request(f'https://www.blueprint-health.com/solutions/assessments', headers=headers)
-webpage = urlopen(r,timeout=10).read()
-soup=BeautifulSoup(webpage, 'html.parser')
-output =soup.find('div', class_="feature-columns w-row")
-output=output.text
+# #######Scrap blueprint-solutions-assessments
+# # # #data scrapped on july 31 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://www.blueprint-health.com/solutions/assessments', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('div', class_="feature-columns w-row")
+# output=output.text
 
-with open("blueprint-solutions-assessments.txt", "a") as f:
+# with open("blueprint-solutions-assessments.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+# #
+
+# ################https://azzly.com/blog/#############################
+# for page in range(1, 16):
+#   req = Request(f"https://azzly.com/blog/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
+
+#   webpage = urlopen(req,timeout=10).read()
+#   news_doc=BeautifulSoup(webpage, 'html.parser')
+#   items = news_doc.find_all("div", class_="blog-entry-content entry-details clr")
+  
+  
+#   for item in items:
+#     title =item.find('h2', class_="blog-entry-title entry-title")
+    
+#     get_link = title.find('a')
+#     link=get_link.attrs['href']
+#     print(link)
+#     headers={'User-Agent': 'XYZ/3.0'}
+#     response = requests.get(link, headers=headers).text
+#     detail_page = BeautifulSoup(response, 'html.parser')
+#     details=detail_page.find("div",class_="single-blog-content entry clr")
+#     news={}
+#     news["Blog Title"]=title.text
+#     try:
+#       news["Blog Description"]=details.text
+#     except:
+#       pass
+#     output.append(news)  
+# with open("azzly-Blogs.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+  
+  
+  
+ #media-hits data of owl-health  
+# import time
+# for page in range(1, 32):
+#   time.sleep(3)
+#   blog_url=f"https://www.owl.health/newsroom/page/{page}/?et_blog"
+#   headers = requests.utils.default_headers()
+#   headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',})
+#   page = requests.get(blog_url, headers=headers).text
+#   doc=BeautifulSoup(page, 'html.parser')
+#   items = doc.find_all('div', class_="et_pb_salvattore_content")
+#   for item in items:
+#     title =item.find('h2',class_="entry-title")
+#     get_link = item.find('a')
+#     link=get_link.attrs['href']
+#     external_details=item.find('div',class_="post-content")
+#     blog={}
+#     blog["Newa Title: "]=title.text
+#     if "https://www.owl.health" in link:
+#       get_details = requests.get(link).text 
+#       detail_page = BeautifulSoup(get_details, 'html.parser')
+#       details=detail_page.find(class_="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body")
+#       if details is not None:
+#         blog["News Description: "]=details.text
+#     else:
+#       blog['Description: '] = external_details.text
+#       blog['External Link: '] = link
+      
+#     output.append(blog)
+# with open("owl-health-media-hits-data.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+# # #######Scrap Mirah homepage
+# # # # #data scrapped on july 31 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://www.mirah.com/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('article', class_="sections")
+# output=output.text
+
+# with open("mirah-homepage-content.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+# # #######Scrap Mirah mbc
+# # # # #data scrapped on july 31 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://www.mirah.com/mbc/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('article', class_="sections")
+# output=output.text
+
+# with open("mirah-mbc.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+# # #######Scrap Mirah for-providers
+# # # # #data scrapped on july 31 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://www.mirah.com/for-providers/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('article', class_="sections")
+# output=output.text
+
+# with open("mirah-for-providers.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+# #######Scrap Mirah product
+# # # #data scrapped on july 31 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://www.mirah.com/product/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('article', class_="sections")
+# output=output.text
+
+# with open("mirah-for-product.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+# #######Scrap Mirah Team
+# # # #data scrapped on july 31 2022    
+# headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','accept': 'application/json' }
+# output = []
+# r = Request(f'https://www.mirah.com/our-team/', headers=headers)
+# webpage = urlopen(r,timeout=10).read()
+# soup=BeautifulSoup(webpage, 'html.parser')
+# output =soup.find('article', class_="sections")
+# output=output.text
+
+# with open("mirah-for-our-team.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+
+################################REMAINING WEBSITES TO BE SCRAPPED#############################
+#for page in range(1, 10 ):
+#   req = Request(f"https://blog.nview.com/page/{page}", headers={'User-Agent': 'XYZ/3.0'})
+
+#   webpage = urlopen(req,timeout=10).read()
+#   news_doc=BeautifulSoup(webpage, 'html.parser')
+#   items = news_doc.find_all("article", class_="blog-index__post blog-index__post--small")
+  
+#   for item in items:
+#     title =item.find('h4', class_="blog-index-title")
+    
+#     get_link = title.find('a')
+#     link=get_link.attrs['href']
+#     headers={'User-Agent': 'XYZ/3.0'}
+#     response = requests.get(link, headers=headers).text
+#     detail_page = BeautifulSoup(response, 'html.parser')
+#     details=detail_page.find("div",class_="blog-post__body")
+#     news={}
+#     news["Blog Title"]=title.text
+#     try:
+#       news["Blog Description"]=details.text
+#     except:
+#       pass
+#     output.append(news)  
+# with open("nview-blog.txt", "a") as f:
+#   output=str(output)
+#   f.write(output)
+#   f.write('\n')
+
+# #owl-health-media-hits
+for page in range(1, 9):
+    req = Request(f"https://www.owl.health/newsroom/page/{page}/?et_blog", headers={'User-Agent': 'XYZ/3.0'})
+
+    webpage = urlopen(req,timeout=10).read()
+    news_doc=BeautifulSoup(webpage, 'html.parser')
+    items = news_doc.find_all("div", class_="column size-1of2")
+    print(items)
+    for item in items:
+      title =item.find(class_="entry-title")
+      
+      get_link = title.find('a')
+      link=get_link.attrs['href']
+      print(link)
+      headers={'User-Agent': 'XYZ/3.0'}
+      response = requests.get(link, headers=headers).text
+      soup = BeautifulSoup(response, 'html.parser')
+      details=soup.find("div",class_="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body")
+      news={}
+      news["News Title: "]=title.text
+      try:
+        news["News Description: "]=details.text
+      except:
+        pass
+      output.append(news)  
+with open("nview-blog.txt", "a") as f:
   output=str(output)
   f.write(output)
   f.write('\n')
-
-
-
