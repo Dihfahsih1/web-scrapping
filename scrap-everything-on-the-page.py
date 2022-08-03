@@ -17,13 +17,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import re
 from urllib.request import urlopen
-from urllib.request import urlretrieve
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.converter import TextConverter
-from pdfminer.layout import LAParams
-from pdfminer.pdfpage import PDFPage
 from io import StringIO,BytesIO
-from PyPDF2 import PdfFileReader, PdfFileWriter
 import time
 import requests
 
@@ -73,51 +67,15 @@ with open("betteroutcomesnow-archived-blogs-data.txt", "a",encoding='utf-8') as 
   f.write(output)# this writes and saves content to the .txt file
   f.write('\n')   #this moves to the next line 
   
-output_string = StringIO()
-def convert_pdf_to_txt(path):
-    rsrcmgr = PDFResourceManager()
-    device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
-    fp = open(path, 'rb')
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    password = ""
-    maxpages = 0
-    caching = True
-    pagenos=set()
-
-    for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
-        interpreter.process_page(page)
-
-    text = output_string.getvalue()
-
-    fp.close()
-    device.close()
-    output_string.close()
-    return text 
-  
-
-
-html = urlopen("https://betteroutcomesnow.com/resources/articles-handouts/")
-html_doc = html.read()
-
-match = re.search(b'\"(.*?\.pdf)\"', html_doc)
-pdf_url = "" + match.group(1).decode('utf8')
-urlretrieve(pdf_url, "download.pdf")
-text = convert_pdf_to_txt("download.pdf")
-print(text)
-
-print(pdf_url)
-
-
-
 #https://www.blueprint-health.com/
 press_url="https://www.blueprint-health.com/blog"
 press_page = requests.get(press_url).text
 press_doc=BeautifulSoup(press_page, 'html.parser')
-press_pages =int(press_doc.find(class_='w-pagination-wrapper').a['href'].split('=')[-1])
+
+press_pages =int(press_doc.find(class_='w-pagination-wrapper').a['href'].split('=')[-1])#we split the url into 2 parts from the equal sign and take the first part immediately afetr the equal signs and then we convert the result int an integer
 
 for page in range(1, press_pages + 1 ):
-  print(page)
-  press_url=f"https://www.blueprint-health.com/blog?cbb911e6_page={page}"
+  press_url=f"https://www.blueprint-health.com/blog?cbb911e6_page={page}" #the {page} is used to pass the integer value to the url which is always the page number on a paginated webpage
   press_page = requests.get(press_url).text
   press_doc=BeautifulSoup(press_page, 'html.parser')
   items = press_doc.find_all(class_="collection-item-blog")
@@ -137,7 +95,8 @@ with open("blueprint-health-blogs.txt", "a",encoding='utf-8') as f:
   output=str(output)
   f.write(output)
   f.write('\n')   
-
+  
+#the remaining code we use the same criteria as explained above
 
 #https://www.greenspacehealth.com/en-ca/
 press_url="https://www.greenspacehealth.com/en-ca/blog"
@@ -154,10 +113,7 @@ for item in items:
   details=detail_page.find(class_="container-9 w-container")
   press={}
   press["Title"]=title.text
-
   press["Description"]=details.text
-
-  
   output.append(press)      
 with open("greenspacehealth-blog-data.txt", "a",encoding='utf-8') as f:
   output=str(output)
@@ -165,10 +121,10 @@ with open("greenspacehealth-blog-data.txt", "a",encoding='utf-8') as f:
   f.write('\n')   
   
 #https://mdlogix.com
-req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})
-webpage = urlopen(req, timeout=10).read()
+req = Request('https://mdlogix.com/mdlogix-news/', headers={'User-Agent': 'XYZ/3.0'})# headers are passed as a dictionary to help pass the request in the payload and to avoid being blocked as requests from bots
+webpage = urlopen(req, timeout=10).read()# timeout is used to create an interval between requests so as not to overwhelm the server with too many requests.
 for page in range(1, 4 ):
-  req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'})
+  req = Request(f"https://mdlogix.com/mdlogix-news/page/{page}/", headers={'User-Agent': 'XYZ/3.0'}) 
   
   webpage = urlopen(req, timeout=100).read()
   news_doc=BeautifulSoup(webpage, 'html.parser')
